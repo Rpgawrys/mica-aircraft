@@ -6,3 +6,7 @@ __pycache__/
 data/runtime_profile.json
 data/schema.md.tmp
 .DS_Store
+
+# internal project notes, not part of the public repo
+MICA_PROJECT_HANDOFF.md
+*HANDOFF*.md
