@@ -1,0 +1,8 @@
+# local environment: credentials come from the shell, topology from .env
+.env
+.venv/
+__pycache__/
+*.pyc
+data/runtime_profile.json
+data/schema.md.tmp
+.DS_Store

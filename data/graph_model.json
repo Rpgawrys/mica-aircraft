@@ -1,0 +1,2706 @@
+{
+ "vertices": {
+  "Platform": [
+   {
+    "node_type": "Platform",
+    "name": "F-22A Raptor",
+    "manufacturer": "Lockheed Martin",
+    "origin_country": "USA",
+    "generation": "5",
+    "role": "Air Superiority",
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Platform",
+    "name": "F-35A Lightning II",
+    "manufacturer": "Lockheed Martin",
+    "origin_country": "USA",
+    "generation": "5",
+    "role": "Multirole",
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Platform",
+    "name": "F-16C Fighting Falcon",
+    "manufacturer": "Lockheed Martin",
+    "origin_country": "USA",
+    "generation": "4",
+    "role": "Multirole",
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Platform",
+    "name": "Su-57 Felon",
+    "manufacturer": "Sukhoi",
+    "origin_country": "Russia",
+    "generation": "5",
+    "role": "Multirole",
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Platform",
+    "name": "Su-35S Flanker-E",
+    "manufacturer": "Sukhoi",
+    "origin_country": "Russia",
+    "generation": "4++",
+    "role": "Air Superiority",
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Platform",
+    "name": "J-20 Mighty Dragon",
+    "manufacturer": "Chengdu",
+    "origin_country": "China",
+    "generation": "5",
+    "role": "Air Superiority",
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Platform",
+    "name": "JF-17 Block 3 Thunder",
+    "manufacturer": "CAC/PAC",
+    "origin_country": "China/Pakistan",
+    "generation": "4.5",
+    "role": "Multirole",
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Platform",
+    "name": "Eurofighter Typhoon",
+    "manufacturer": "Eurofighter",
+    "origin_country": "Europe",
+    "generation": "4.5",
+    "role": "Multirole",
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Platform",
+    "name": "Dassault Rafale",
+    "manufacturer": "Dassault",
+    "origin_country": "France",
+    "generation": "4.5",
+    "role": "Multirole",
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Performance": [
+   {
+    "node_type": "Performance",
+    "platform": "F-22A Raptor",
+    "cruise_speed_kmh": 1060,
+    "supercruise_kmh": 1810,
+    "supercruise_capable": true,
+    "service_ceiling_m": 15000,
+    "ferry_range_km": 3330,
+    "max_speed_kmh_nominal": 2130,
+    "max_speed_kmh_min": 2023.5,
+    "max_speed_kmh_max": 2236.5,
+    "combat_radius_km_nominal": 759,
+    "combat_radius_km_min": 683.1,
+    "combat_radius_km_max": 834.9,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Performance",
+    "platform": "F-35A Lightning II",
+    "cruise_speed_kmh": 1050,
+    "supercruise_kmh": 0,
+    "supercruise_capable": false,
+    "service_ceiling_m": 15240,
+    "ferry_range_km": 2800,
+    "max_speed_kmh_nominal": 1960,
+    "max_speed_kmh_min": 1862.0,
+    "max_speed_kmh_max": 2058.0,
+    "combat_radius_km_nominal": 1093,
+    "combat_radius_km_min": 983.7,
+    "combat_radius_km_max": 1202.3,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Performance",
+    "platform": "F-16C Fighting Falcon",
+    "cruise_speed_kmh": 900,
+    "supercruise_kmh": 0,
+    "supercruise_capable": false,
+    "service_ceiling_m": 15240,
+    "ferry_range_km": 4220,
+    "max_speed_kmh_nominal": 2120,
+    "max_speed_kmh_min": 2014.0,
+    "max_speed_kmh_max": 2226.0,
+    "combat_radius_km_nominal": 550,
+    "combat_radius_km_min": 495.0,
+    "combat_radius_km_max": 605.0,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Performance",
+    "platform": "Su-57 Felon",
+    "cruise_speed_kmh": 1100,
+    "supercruise_kmh": 1400,
+    "supercruise_capable": true,
+    "service_ceiling_m": 20000,
+    "ferry_range_km": 3500,
+    "max_speed_kmh_nominal": 2135,
+    "max_speed_kmh_min": 2028.25,
+    "max_speed_kmh_max": 2241.75,
+    "combat_radius_km_nominal": 1500,
+    "combat_radius_km_min": 1350.0,
+    "combat_radius_km_max": 1650.0,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Performance",
+    "platform": "Su-35S Flanker-E",
+    "cruise_speed_kmh": 980,
+    "supercruise_kmh": 0,
+    "supercruise_capable": false,
+    "service_ceiling_m": 18000,
+    "ferry_range_km": 4500,
+    "max_speed_kmh_nominal": 2500,
+    "max_speed_kmh_min": 2375.0,
+    "max_speed_kmh_max": 2625.0,
+    "combat_radius_km_nominal": 1600,
+    "combat_radius_km_min": 1440.0,
+    "combat_radius_km_max": 1760.0,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Performance",
+    "platform": "J-20 Mighty Dragon",
+    "cruise_speed_kmh": 1050,
+    "supercruise_kmh": 0,
+    "supercruise_capable": true,
+    "service_ceiling_m": 20000,
+    "ferry_range_km": 5500,
+    "max_speed_kmh_nominal": 2100,
+    "max_speed_kmh_min": 1995.0,
+    "max_speed_kmh_max": 2205.0,
+    "combat_radius_km_nominal": 1100,
+    "combat_radius_km_min": 990.0,
+    "combat_radius_km_max": 1210.0,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Performance",
+    "platform": "JF-17 Block 3 Thunder",
+    "cruise_speed_kmh": 880,
+    "supercruise_kmh": 0,
+    "supercruise_capable": false,
+    "service_ceiling_m": 16920,
+    "ferry_range_km": 3482,
+    "max_speed_kmh_nominal": 1960,
+    "max_speed_kmh_min": 1862.0,
+    "max_speed_kmh_max": 2058.0,
+    "combat_radius_km_nominal": 1352,
+    "combat_radius_km_min": 1216.8,
+    "combat_radius_km_max": 1487.2,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Performance",
+    "platform": "Eurofighter Typhoon",
+    "cruise_speed_kmh": 1000,
+    "supercruise_kmh": 1530,
+    "supercruise_capable": true,
+    "service_ceiling_m": 19812,
+    "ferry_range_km": 3790,
+    "max_speed_kmh_nominal": 2495,
+    "max_speed_kmh_min": 2370.25,
+    "max_speed_kmh_max": 2619.75,
+    "combat_radius_km_nominal": 1389,
+    "combat_radius_km_min": 1250.1,
+    "combat_radius_km_max": 1527.9,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Performance",
+    "platform": "Dassault Rafale",
+    "cruise_speed_kmh": 980,
+    "supercruise_kmh": 0,
+    "supercruise_capable": false,
+    "service_ceiling_m": 15835,
+    "ferry_range_km": 3700,
+    "max_speed_kmh_nominal": 1912,
+    "max_speed_kmh_min": 1816.4,
+    "max_speed_kmh_max": 2007.6,
+    "combat_radius_km_nominal": 1850,
+    "combat_radius_km_min": 1665.0,
+    "combat_radius_km_max": 2035.0,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Signature": [
+   {
+    "node_type": "Signature",
+    "platform": "F-22A Raptor",
+    "rcs_m2_nominal": 0.0001,
+    "rcs_m2_min": 8.5e-05,
+    "rcs_m2_max": 0.000115,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Signature",
+    "platform": "F-35A Lightning II",
+    "rcs_m2_nominal": 0.005,
+    "rcs_m2_min": 0.00425,
+    "rcs_m2_max": 0.00575,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Signature",
+    "platform": "F-16C Fighting Falcon",
+    "rcs_m2_nominal": 5.0,
+    "rcs_m2_min": 4.25,
+    "rcs_m2_max": 5.75,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Signature",
+    "platform": "Su-57 Felon",
+    "rcs_m2_nominal": 0.3,
+    "rcs_m2_min": 0.255,
+    "rcs_m2_max": 0.345,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Signature",
+    "platform": "Su-35S Flanker-E",
+    "rcs_m2_nominal": 3.0,
+    "rcs_m2_min": 2.55,
+    "rcs_m2_max": 3.45,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Signature",
+    "platform": "J-20 Mighty Dragon",
+    "rcs_m2_nominal": 0.01,
+    "rcs_m2_min": 0.0085,
+    "rcs_m2_max": 0.0115,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Signature",
+    "platform": "JF-17 Block 3 Thunder",
+    "rcs_m2_nominal": 3.0,
+    "rcs_m2_min": 2.55,
+    "rcs_m2_max": 3.45,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Signature",
+    "platform": "Eurofighter Typhoon",
+    "rcs_m2_nominal": 1.0,
+    "rcs_m2_min": 0.85,
+    "rcs_m2_max": 1.15,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Signature",
+    "platform": "Dassault Rafale",
+    "rcs_m2_nominal": 1.0,
+    "rcs_m2_min": 0.85,
+    "rcs_m2_max": 1.15,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Airframe": [
+   {
+    "node_type": "Airframe",
+    "platform": "F-22A Raptor",
+    "empty_weight_kg": 19700,
+    "mtow_kg": 38000,
+    "hardpoints": 12,
+    "max_weapon_load_kg": 5000,
+    "internal_weapons_bay": true,
+    "internal_fuel_kg": 8200,
+    "fuel_consumption_cruise_kg_h": 4100,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Airframe",
+    "platform": "F-35A Lightning II",
+    "empty_weight_kg": 13170,
+    "mtow_kg": 31800,
+    "hardpoints": 10,
+    "max_weapon_load_kg": 10000,
+    "internal_weapons_bay": true,
+    "internal_fuel_kg": 8278,
+    "fuel_consumption_cruise_kg_h": 2800,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Airframe",
+    "platform": "F-16C Fighting Falcon",
+    "empty_weight_kg": 8570,
+    "mtow_kg": 21772,
+    "hardpoints": 9,
+    "max_weapon_load_kg": 7700,
+    "internal_weapons_bay": false,
+    "internal_fuel_kg": 3175,
+    "fuel_consumption_cruise_kg_h": 2500,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Airframe",
+    "platform": "Su-57 Felon",
+    "empty_weight_kg": 18000,
+    "mtow_kg": 35000,
+    "hardpoints": 12,
+    "max_weapon_load_kg": 7400,
+    "internal_weapons_bay": true,
+    "internal_fuel_kg": 10300,
+    "fuel_consumption_cruise_kg_h": 3500,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Airframe",
+    "platform": "Su-35S Flanker-E",
+    "empty_weight_kg": 18400,
+    "mtow_kg": 34500,
+    "hardpoints": 12,
+    "max_weapon_load_kg": 8000,
+    "internal_weapons_bay": false,
+    "internal_fuel_kg": 11500,
+    "fuel_consumption_cruise_kg_h": 3800,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Airframe",
+    "platform": "J-20 Mighty Dragon",
+    "empty_weight_kg": 17000,
+    "mtow_kg": 37000,
+    "hardpoints": 8,
+    "max_weapon_load_kg": 7500,
+    "internal_weapons_bay": true,
+    "internal_fuel_kg": 11000,
+    "fuel_consumption_cruise_kg_h": 3400,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Airframe",
+    "platform": "JF-17 Block 3 Thunder",
+    "empty_weight_kg": 6586,
+    "mtow_kg": 12700,
+    "hardpoints": 7,
+    "max_weapon_load_kg": 3800,
+    "internal_weapons_bay": false,
+    "internal_fuel_kg": 2330,
+    "fuel_consumption_cruise_kg_h": 1800,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Airframe",
+    "platform": "Eurofighter Typhoon",
+    "empty_weight_kg": 11000,
+    "mtow_kg": 23500,
+    "hardpoints": 13,
+    "max_weapon_load_kg": 7500,
+    "internal_weapons_bay": false,
+    "internal_fuel_kg": 5000,
+    "fuel_consumption_cruise_kg_h": 2900,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Airframe",
+    "platform": "Dassault Rafale",
+    "empty_weight_kg": 10300,
+    "mtow_kg": 24500,
+    "hardpoints": 14,
+    "max_weapon_load_kg": 9500,
+    "internal_weapons_bay": false,
+    "internal_fuel_kg": 4700,
+    "fuel_consumption_cruise_kg_h": 2400,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Program": [
+   {
+    "node_type": "Program",
+    "platform": "F-22A Raptor",
+    "first_flight_year": 1997,
+    "in_service_year": 2005,
+    "status": "Operational",
+    "units_produced": 195,
+    "unit_cost_m_usd": 150,
+    "cost_per_flight_hour_usd": 70000,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Program",
+    "platform": "F-35A Lightning II",
+    "first_flight_year": 2006,
+    "in_service_year": 2016,
+    "status": "Operational",
+    "units_produced": 1000,
+    "unit_cost_m_usd": 82,
+    "cost_per_flight_hour_usd": 42000,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Program",
+    "platform": "F-16C Fighting Falcon",
+    "first_flight_year": 1974,
+    "in_service_year": 1978,
+    "status": "Operational",
+    "units_produced": 4604,
+    "unit_cost_m_usd": 35,
+    "cost_per_flight_hour_usd": 22000,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Program",
+    "platform": "Su-57 Felon",
+    "first_flight_year": 2010,
+    "in_service_year": 2020,
+    "status": "Operational",
+    "units_produced": 32,
+    "unit_cost_m_usd": 42,
+    "cost_per_flight_hour_usd": 35000,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Program",
+    "platform": "Su-35S Flanker-E",
+    "first_flight_year": 2008,
+    "in_service_year": 2014,
+    "status": "Operational",
+    "units_produced": 172,
+    "unit_cost_m_usd": 50,
+    "cost_per_flight_hour_usd": 18000,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Program",
+    "platform": "J-20 Mighty Dragon",
+    "first_flight_year": 2011,
+    "in_service_year": 2017,
+    "status": "Operational",
+    "units_produced": 250,
+    "unit_cost_m_usd": 110,
+    "cost_per_flight_hour_usd": 40000,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Program",
+    "platform": "JF-17 Block 3 Thunder",
+    "first_flight_year": 2003,
+    "in_service_year": 2007,
+    "status": "Operational",
+    "units_produced": 175,
+    "unit_cost_m_usd": 32,
+    "cost_per_flight_hour_usd": 8000,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Program",
+    "platform": "Eurofighter Typhoon",
+    "first_flight_year": 1994,
+    "in_service_year": 2003,
+    "status": "Operational",
+    "units_produced": 680,
+    "unit_cost_m_usd": 110,
+    "cost_per_flight_hour_usd": 40000,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Program",
+    "platform": "Dassault Rafale",
+    "first_flight_year": 1986,
+    "in_service_year": 2001,
+    "status": "Operational",
+    "units_produced": 234,
+    "unit_cost_m_usd": 95,
+    "cost_per_flight_hour_usd": 35000,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Propulsion": [
+   {
+    "node_type": "Propulsion",
+    "platform": "F-22A Raptor",
+    "engine_count": 2,
+    "thrust_per_engine_kn": 156,
+    "thrust_vectoring": true,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Propulsion",
+    "platform": "F-35A Lightning II",
+    "engine_count": 1,
+    "thrust_per_engine_kn": 191,
+    "thrust_vectoring": false,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Propulsion",
+    "platform": "F-16C Fighting Falcon",
+    "engine_count": 1,
+    "thrust_per_engine_kn": 129,
+    "thrust_vectoring": false,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Propulsion",
+    "platform": "Su-57 Felon",
+    "engine_count": 2,
+    "thrust_per_engine_kn": 147,
+    "thrust_vectoring": true,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Propulsion",
+    "platform": "Su-35S Flanker-E",
+    "engine_count": 2,
+    "thrust_per_engine_kn": 142,
+    "thrust_vectoring": true,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Propulsion",
+    "platform": "J-20 Mighty Dragon",
+    "engine_count": 2,
+    "thrust_per_engine_kn": 180,
+    "thrust_vectoring": true,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Propulsion",
+    "platform": "JF-17 Block 3 Thunder",
+    "engine_count": 1,
+    "thrust_per_engine_kn": 84,
+    "thrust_vectoring": false,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Propulsion",
+    "platform": "Eurofighter Typhoon",
+    "engine_count": 2,
+    "thrust_per_engine_kn": 90,
+    "thrust_vectoring": false,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Propulsion",
+    "platform": "Dassault Rafale",
+    "engine_count": 2,
+    "thrust_per_engine_kn": 75,
+    "thrust_vectoring": false,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Sensors": [
+   {
+    "node_type": "Sensors",
+    "platform": "F-22A Raptor",
+    "radar_score": 0.9,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Sensors",
+    "platform": "F-35A Lightning II",
+    "radar_score": 0.95,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Sensors",
+    "platform": "F-16C Fighting Falcon",
+    "radar_score": 0.25,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Sensors",
+    "platform": "Su-57 Felon",
+    "radar_score": 0.95,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Sensors",
+    "platform": "Su-35S Flanker-E",
+    "radar_score": 0.5,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Sensors",
+    "platform": "J-20 Mighty Dragon",
+    "radar_score": 0.7,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Sensors",
+    "platform": "JF-17 Block 3 Thunder",
+    "radar_score": 0.6,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Sensors",
+    "platform": "Eurofighter Typhoon",
+    "radar_score": 0.7,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Sensors",
+    "platform": "Dassault Rafale",
+    "radar_score": 0.7,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "ElectronicWarfare": [
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "F-22A Raptor",
+    "ew_score": 0.95,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "F-35A Lightning II",
+    "ew_score": 1.0,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "F-16C Fighting Falcon",
+    "ew_score": 0.4,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "Su-57 Felon",
+    "ew_score": 0.75,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "Su-35S Flanker-E",
+    "ew_score": 0.5,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "J-20 Mighty Dragon",
+    "ew_score": 0.65,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "JF-17 Block 3 Thunder",
+    "ew_score": 0.35,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "Eurofighter Typhoon",
+    "ew_score": 0.7,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "ElectronicWarfare",
+    "platform": "Dassault Rafale",
+    "ew_score": 0.75,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Armament": [
+   {
+    "node_type": "Armament",
+    "platform": "F-22A Raptor",
+    "missile_score": 0.9,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Armament",
+    "platform": "F-35A Lightning II",
+    "missile_score": 0.9,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Armament",
+    "platform": "F-16C Fighting Falcon",
+    "missile_score": 0.75,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Armament",
+    "platform": "Su-57 Felon",
+    "missile_score": 0.9,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Armament",
+    "platform": "Su-35S Flanker-E",
+    "missile_score": 0.9,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Armament",
+    "platform": "J-20 Mighty Dragon",
+    "missile_score": 0.85,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Armament",
+    "platform": "JF-17 Block 3 Thunder",
+    "missile_score": 0.85,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Armament",
+    "platform": "Eurofighter Typhoon",
+    "missile_score": 0.9,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Armament",
+    "platform": "Dassault Rafale",
+    "missile_score": 0.9,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Operators": [
+   {
+    "node_type": "Operators",
+    "platform": "F-22A Raptor",
+    "number_of_operators": 1,
+    "_key": "f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Operators",
+    "platform": "F-35A Lightning II",
+    "number_of_operators": 20,
+    "_key": "f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Operators",
+    "platform": "F-16C Fighting Falcon",
+    "number_of_operators": 25,
+    "_key": "f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Operators",
+    "platform": "Su-57 Felon",
+    "number_of_operators": 1,
+    "_key": "su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Operators",
+    "platform": "Su-35S Flanker-E",
+    "number_of_operators": 5,
+    "_key": "su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Operators",
+    "platform": "J-20 Mighty Dragon",
+    "number_of_operators": 1,
+    "_key": "j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Operators",
+    "platform": "JF-17 Block 3 Thunder",
+    "number_of_operators": 3,
+    "_key": "jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Operators",
+    "platform": "Eurofighter Typhoon",
+    "number_of_operators": 9,
+    "_key": "eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Operators",
+    "platform": "Dassault Rafale",
+    "number_of_operators": 7,
+    "_key": "dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Engine": [
+   {
+    "node_type": "Engine",
+    "name": "Pratt & Whitney F119-PW-100",
+    "thrust_per_engine_kn": 156,
+    "_key": "pratt_whitney_f119_pw_100",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Engine",
+    "name": "Pratt & Whitney F135-PW-100",
+    "thrust_per_engine_kn": 191,
+    "_key": "pratt_whitney_f135_pw_100",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Engine",
+    "name": "General Electric F110-GE-100",
+    "thrust_per_engine_kn": 129,
+    "_key": "general_electric_f110_ge_100",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Engine",
+    "name": "Saturn AL-41F1",
+    "thrust_per_engine_kn": 147,
+    "_key": "saturn_al_41f1",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Engine",
+    "name": "Saturn AL-41F1S",
+    "thrust_per_engine_kn": 142,
+    "_key": "saturn_al_41f1s",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Engine",
+    "name": "WS-15",
+    "thrust_per_engine_kn": 180,
+    "_key": "ws_15",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Engine",
+    "name": "Klimov RD-93",
+    "thrust_per_engine_kn": 84,
+    "_key": "klimov_rd_93",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Engine",
+    "name": "Eurojet EJ200",
+    "thrust_per_engine_kn": 90,
+    "_key": "eurojet_ej200",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "Engine",
+    "name": "Snecma M88-2",
+    "thrust_per_engine_kn": 75,
+    "_key": "snecma_m88_2",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "RadarSystem": [
+   {
+    "node_type": "RadarSystem",
+    "name": "AN/APG-77",
+    "radar_type": "AESA",
+    "_key": "an_apg_77",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "RadarSystem",
+    "name": "AN/APG-81",
+    "radar_type": "AESA",
+    "_key": "an_apg_81",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "RadarSystem",
+    "name": "AN/APG-68",
+    "radar_type": "Mechanically Scanned",
+    "_key": "an_apg_68",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "RadarSystem",
+    "name": "Sh121 MIRES",
+    "radar_type": "AESA",
+    "_key": "sh121_mires",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "RadarSystem",
+    "name": "Irbis-E N035",
+    "radar_type": "PESA",
+    "_key": "irbis_e_n035",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "RadarSystem",
+    "name": "Type 1475 KLJ-5",
+    "radar_type": "AESA",
+    "_key": "type_1475_klj_5",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "RadarSystem",
+    "name": "KLJ-7A",
+    "radar_type": "AESA",
+    "_key": "klj_7a",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "RadarSystem",
+    "name": "Captor-E",
+    "radar_type": "AESA",
+    "_key": "captor_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "node_type": "RadarSystem",
+    "name": "RBE2 AA",
+    "radar_type": "AESA",
+    "_key": "rbe2_aa",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "Weapon": [
+   {
+    "node_type": "Weapon",
+    "name": "AIM-120C-7 AMRAAM",
+    "weapon_type": "AAM-BVR",
+    "guidance": "active radar homing",
+    "range_km": 105,
+    "warhead_kg": 18,
+    "origin_country": "USA",
+    "provenance": "baseline_reference",
+    "_key": "weapon_aim120c7"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "AIM-9X Sidewinder Block II",
+    "weapon_type": "AAM-WVR",
+    "guidance": "imaging infrared homing",
+    "range_km": 35,
+    "warhead_kg": 9.4,
+    "origin_country": "USA",
+    "provenance": "baseline_reference",
+    "_key": "weapon_aim9x"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "GBU-39 Small Diameter Bomb",
+    "weapon_type": "BOMB",
+    "guidance": "GPS/INS",
+    "range_km": 110,
+    "warhead_kg": 93,
+    "origin_country": "USA",
+    "provenance": "baseline_reference",
+    "_key": "weapon_gbu39"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "GBU-31 JDAM",
+    "weapon_type": "BOMB",
+    "guidance": "GPS/INS",
+    "range_km": 28,
+    "warhead_kg": 890,
+    "origin_country": "USA",
+    "provenance": "baseline_reference",
+    "_key": "weapon_gbu31"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "R-77-1 (RVV-SD)",
+    "weapon_type": "AAM-BVR",
+    "guidance": "active radar homing",
+    "range_km": 110,
+    "warhead_kg": 22.5,
+    "origin_country": "Russia",
+    "provenance": "baseline_reference",
+    "_key": "weapon_r77m"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "R-73 (AA-11 Archer)",
+    "weapon_type": "AAM-WVR",
+    "guidance": "infrared homing",
+    "range_km": 30,
+    "warhead_kg": 7.4,
+    "origin_country": "Russia",
+    "provenance": "baseline_reference",
+    "_key": "weapon_r73"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "R-37M",
+    "weapon_type": "AAM-BVR",
+    "guidance": "active radar homing, inertial midcourse",
+    "range_km": 300,
+    "warhead_kg": 60,
+    "origin_country": "Russia",
+    "provenance": "baseline_reference",
+    "_key": "weapon_r37m"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "Kh-38M",
+    "weapon_type": "AGM",
+    "guidance": "laser/TV/active radar seeker family",
+    "range_km": 40,
+    "warhead_kg": 250,
+    "origin_country": "Russia",
+    "provenance": "baseline_reference",
+    "_key": "weapon_kh38"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "PL-15",
+    "weapon_type": "AAM-BVR",
+    "guidance": "active radar homing (AESA seeker)",
+    "range_km": 200,
+    "warhead_kg": 20,
+    "origin_country": "China",
+    "provenance": "baseline_reference",
+    "_key": "weapon_pl15"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "PL-10",
+    "weapon_type": "AAM-WVR",
+    "guidance": "imaging infrared homing",
+    "range_km": 20,
+    "warhead_kg": 10,
+    "origin_country": "China",
+    "provenance": "baseline_reference",
+    "_key": "weapon_pl10"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "PL-5E II",
+    "weapon_type": "AAM-WVR",
+    "guidance": "infrared homing",
+    "range_km": 18,
+    "warhead_kg": 9,
+    "origin_country": "China",
+    "provenance": "baseline_reference",
+    "_key": "weapon_pl5e"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "SD-10 (PL-12 export)",
+    "weapon_type": "AAM-BVR",
+    "guidance": "active radar homing",
+    "range_km": 100,
+    "warhead_kg": 20,
+    "origin_country": "China",
+    "provenance": "baseline_reference",
+    "_key": "weapon_sd10"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "MBDA Meteor",
+    "weapon_type": "AAM-BVR",
+    "guidance": "active radar homing, ramjet-sustained, datalink-updated",
+    "range_km": 200,
+    "warhead_kg": 24,
+    "origin_country": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "weapon_meteor"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "MBDA ASRAAM",
+    "weapon_type": "AAM-WVR",
+    "guidance": "imaging infrared homing",
+    "range_km": 25,
+    "warhead_kg": 10,
+    "origin_country": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "weapon_asraam"
+   },
+   {
+    "node_type": "Weapon",
+    "name": "MBDA MICA",
+    "weapon_type": "AAM-BVR/WVR",
+    "guidance": "active radar or imaging infrared (dual seeker family)",
+    "range_km": 80,
+    "warhead_kg": 12,
+    "origin_country": "France",
+    "provenance": "baseline_reference",
+    "_key": "weapon_mica"
+   }
+  ],
+  "DefensiveSystem": [
+   {
+    "node_type": "DefensiveSystem",
+    "name": "AN/ALR-94 / AN/ALE-52 Integrated EW Suite",
+    "system_type": "INTERNAL_EW_SUITE",
+    "description": "F-22A integrated radar warning receiver and towed-decoy self-protection suite",
+    "provenance": "baseline_reference",
+    "_key": "def_alr94_ale52"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "AN/ALE-47 CMDS",
+    "system_type": "CHAFF_FLARE_DISPENSER",
+    "description": "Common US countermeasure dispensing system",
+    "provenance": "baseline_reference",
+    "_key": "def_ale47"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "AN/ALQ-239 Barracuda",
+    "system_type": "INTERNAL_EW_SUITE",
+    "description": "F-35 integrated core EW system",
+    "provenance": "baseline_reference",
+    "_key": "def_alq239"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "AN/ALQ-184",
+    "system_type": "EW_JAMMING_POD",
+    "description": "Podded self-protection jammer for legacy F-16/F-15/F/A-18 fleets",
+    "provenance": "baseline_reference",
+    "_key": "def_alq184"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "L402 Himalayas",
+    "system_type": "INTERNAL_EW_SUITE",
+    "description": "Su-57 integrated electronic warfare suite",
+    "provenance": "baseline_reference",
+    "_key": "def_l402_himalayas"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "APP-50 dispenser family",
+    "system_type": "CHAFF_FLARE_DISPENSER",
+    "description": "Common Russian countermeasure dispenser family",
+    "provenance": "baseline_reference",
+    "_key": "def_app50"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "Khibiny-M (L175M)",
+    "system_type": "EW_JAMMING_POD",
+    "description": "Wingtip-mounted jamming pod fielded on Su-35S",
+    "provenance": "baseline_reference",
+    "_key": "def_khibiny_l175m"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "Type 8607 Integrated EW Suite",
+    "system_type": "INTERNAL_EW_SUITE",
+    "description": "Baseline J-20 integrated electronic warfare suite",
+    "provenance": "baseline_reference",
+    "_key": "def_j20_ews"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "BM/KZ dispenser series",
+    "system_type": "CHAFF_FLARE_DISPENSER",
+    "description": "Common Chinese countermeasure dispenser series",
+    "provenance": "baseline_reference",
+    "_key": "def_bmkz"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "KG600 jamming pod",
+    "system_type": "EW_JAMMING_POD",
+    "description": "Externally podded jammer used on non-stealth Chinese/Pakistani fighters",
+    "provenance": "baseline_reference",
+    "_key": "def_kg600"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "Praetorian DASS",
+    "system_type": "INTERNAL_EW_SUITE",
+    "description": "Eurofighter Typhoon integrated defensive aids sub-system",
+    "provenance": "baseline_reference",
+    "_key": "def_praetorian_dass"
+   },
+   {
+    "node_type": "DefensiveSystem",
+    "name": "SPECTRA",
+    "system_type": "INTERNAL_EW_SUITE",
+    "description": "Dassault Rafale integrated defensive aids suite",
+    "provenance": "baseline_reference",
+    "_key": "def_spectra"
+   }
+  ],
+  "Country": [
+   {
+    "node_type": "Country",
+    "name": "USA",
+    "region": "North America",
+    "provenance": "baseline_reference",
+    "_key": "country_usa"
+   },
+   {
+    "node_type": "Country",
+    "name": "United Kingdom",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_uk"
+   },
+   {
+    "node_type": "Country",
+    "name": "Italy",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_italy"
+   },
+   {
+    "node_type": "Country",
+    "name": "Netherlands",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_netherlands"
+   },
+   {
+    "node_type": "Country",
+    "name": "Australia",
+    "region": "Oceania",
+    "provenance": "baseline_reference",
+    "_key": "country_australia"
+   },
+   {
+    "node_type": "Country",
+    "name": "Norway",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_norway"
+   },
+   {
+    "node_type": "Country",
+    "name": "Israel",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_israel"
+   },
+   {
+    "node_type": "Country",
+    "name": "Japan",
+    "region": "East Asia",
+    "provenance": "baseline_reference",
+    "_key": "country_japan"
+   },
+   {
+    "node_type": "Country",
+    "name": "South Korea",
+    "region": "East Asia",
+    "provenance": "baseline_reference",
+    "_key": "country_south_korea"
+   },
+   {
+    "node_type": "Country",
+    "name": "Poland",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_poland"
+   },
+   {
+    "node_type": "Country",
+    "name": "Egypt",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_egypt"
+   },
+   {
+    "node_type": "Country",
+    "name": "Turkey",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_turkey"
+   },
+   {
+    "node_type": "Country",
+    "name": "Greece",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_greece"
+   },
+   {
+    "node_type": "Country",
+    "name": "Taiwan",
+    "region": "East Asia",
+    "provenance": "baseline_reference",
+    "_key": "country_taiwan"
+   },
+   {
+    "node_type": "Country",
+    "name": "Chile",
+    "region": "South America",
+    "provenance": "baseline_reference",
+    "_key": "country_chile"
+   },
+   {
+    "node_type": "Country",
+    "name": "Jordan",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_jordan"
+   },
+   {
+    "node_type": "Country",
+    "name": "Russia",
+    "region": "Eurasia",
+    "provenance": "baseline_reference",
+    "_key": "country_russia"
+   },
+   {
+    "node_type": "Country",
+    "name": "China",
+    "region": "East Asia",
+    "provenance": "baseline_reference",
+    "_key": "country_china"
+   },
+   {
+    "node_type": "Country",
+    "name": "Iran",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_iran"
+   },
+   {
+    "node_type": "Country",
+    "name": "Algeria",
+    "region": "North Africa",
+    "provenance": "baseline_reference",
+    "_key": "country_algeria"
+   },
+   {
+    "node_type": "Country",
+    "name": "Pakistan",
+    "region": "South Asia",
+    "provenance": "baseline_reference",
+    "_key": "country_pakistan"
+   },
+   {
+    "node_type": "Country",
+    "name": "Myanmar",
+    "region": "Southeast Asia",
+    "provenance": "baseline_reference",
+    "_key": "country_myanmar"
+   },
+   {
+    "node_type": "Country",
+    "name": "Nigeria",
+    "region": "West Africa",
+    "provenance": "baseline_reference",
+    "_key": "country_nigeria"
+   },
+   {
+    "node_type": "Country",
+    "name": "Germany",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_germany"
+   },
+   {
+    "node_type": "Country",
+    "name": "Spain",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_spain"
+   },
+   {
+    "node_type": "Country",
+    "name": "Austria",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_austria"
+   },
+   {
+    "node_type": "Country",
+    "name": "Saudi Arabia",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_saudi_arabia"
+   },
+   {
+    "node_type": "Country",
+    "name": "Oman",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_oman"
+   },
+   {
+    "node_type": "Country",
+    "name": "Kuwait",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_kuwait"
+   },
+   {
+    "node_type": "Country",
+    "name": "Qatar",
+    "region": "Middle East",
+    "provenance": "baseline_reference",
+    "_key": "country_qatar"
+   },
+   {
+    "node_type": "Country",
+    "name": "France",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_france"
+   },
+   {
+    "node_type": "Country",
+    "name": "India",
+    "region": "South Asia",
+    "provenance": "baseline_reference",
+    "_key": "country_india"
+   },
+   {
+    "node_type": "Country",
+    "name": "Croatia",
+    "region": "Europe",
+    "provenance": "baseline_reference",
+    "_key": "country_croatia"
+   },
+   {
+    "node_type": "Country",
+    "name": "Indonesia",
+    "region": "Southeast Asia",
+    "provenance": "baseline_reference",
+    "_key": "country_indonesia"
+   }
+  ]
+ },
+ "edges": {
+  "has_performance": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "Performance/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "Performance/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "Performance/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "Performance/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "Performance/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "Performance/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "Performance/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "Performance/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "Performance/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "has_signature": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "Signature/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "Signature/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "Signature/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "Signature/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "Signature/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "Signature/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "Signature/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "Signature/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "Signature/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "has_airframe": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "Airframe/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "Airframe/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "Airframe/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "Airframe/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "Airframe/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "Airframe/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "Airframe/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "Airframe/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "Airframe/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "has_program": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "Program/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "Program/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "Program/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "Program/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "Program/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "Program/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "Program/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "Program/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "Program/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "has_propulsion": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "Propulsion/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "Propulsion/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "Propulsion/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "Propulsion/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "Propulsion/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "Propulsion/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "Propulsion/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "Propulsion/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "Propulsion/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "has_sensors": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "Sensors/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "Sensors/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "Sensors/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "Sensors/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "Sensors/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "Sensors/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "Sensors/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "Sensors/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "Sensors/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "has_electronic_warfare": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "ElectronicWarfare/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "ElectronicWarfare/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "ElectronicWarfare/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "ElectronicWarfare/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "ElectronicWarfare/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "ElectronicWarfare/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "ElectronicWarfare/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "ElectronicWarfare/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "ElectronicWarfare/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "has_armament": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "Armament/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "Armament/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "Armament/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "Armament/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "Armament/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "Armament/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "Armament/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "Armament/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "Armament/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "has_operators": [
+   {
+    "_from": "Platform/f_22a_raptor",
+    "_to": "Operators/f_22a_raptor",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_35a_lightning_ii",
+    "_to": "Operators/f_35a_lightning_ii",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/f_16c_fighting_falcon",
+    "_to": "Operators/f_16c_fighting_falcon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_57_felon",
+    "_to": "Operators/su_57_felon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/su_35s_flanker_e",
+    "_to": "Operators/su_35s_flanker_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/j_20_mighty_dragon",
+    "_to": "Operators/j_20_mighty_dragon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/jf_17_block_3_thunder",
+    "_to": "Operators/jf_17_block_3_thunder",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/eurofighter_typhoon",
+    "_to": "Operators/eurofighter_typhoon",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Platform/dassault_rafale",
+    "_to": "Operators/dassault_rafale",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "equipped_engine": [
+   {
+    "_from": "Propulsion/f_22a_raptor",
+    "_to": "Engine/pratt_whitney_f119_pw_100",
+    "count": 2,
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Propulsion/f_35a_lightning_ii",
+    "_to": "Engine/pratt_whitney_f135_pw_100",
+    "count": 1,
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Propulsion/f_16c_fighting_falcon",
+    "_to": "Engine/general_electric_f110_ge_100",
+    "count": 1,
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Propulsion/su_57_felon",
+    "_to": "Engine/saturn_al_41f1",
+    "count": 2,
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Propulsion/su_35s_flanker_e",
+    "_to": "Engine/saturn_al_41f1s",
+    "count": 2,
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Propulsion/j_20_mighty_dragon",
+    "_to": "Engine/ws_15",
+    "count": 2,
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Propulsion/jf_17_block_3_thunder",
+    "_to": "Engine/klimov_rd_93",
+    "count": 1,
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Propulsion/eurofighter_typhoon",
+    "_to": "Engine/eurojet_ej200",
+    "count": 2,
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Propulsion/dassault_rafale",
+    "_to": "Engine/snecma_m88_2",
+    "count": 2,
+    "provenance": "baseline_csv"
+   }
+  ],
+  "equipped_radar": [
+   {
+    "_from": "Sensors/f_22a_raptor",
+    "_to": "RadarSystem/an_apg_77",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Sensors/f_35a_lightning_ii",
+    "_to": "RadarSystem/an_apg_81",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Sensors/f_16c_fighting_falcon",
+    "_to": "RadarSystem/an_apg_68",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Sensors/su_57_felon",
+    "_to": "RadarSystem/sh121_mires",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Sensors/su_35s_flanker_e",
+    "_to": "RadarSystem/irbis_e_n035",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Sensors/j_20_mighty_dragon",
+    "_to": "RadarSystem/type_1475_klj_5",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Sensors/jf_17_block_3_thunder",
+    "_to": "RadarSystem/klj_7a",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Sensors/eurofighter_typhoon",
+    "_to": "RadarSystem/captor_e",
+    "provenance": "baseline_csv"
+   },
+   {
+    "_from": "Sensors/dassault_rafale",
+    "_to": "RadarSystem/rbe2_aa",
+    "provenance": "baseline_csv"
+   }
+  ],
+  "equipped_defensive_system": [
+   {
+    "_from": "ElectronicWarfare/f_22a_raptor",
+    "_to": "DefensiveSystem/def_alr94_ale52",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/f_22a_raptor",
+    "_to": "DefensiveSystem/def_ale47",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/f_35a_lightning_ii",
+    "_to": "DefensiveSystem/def_alq239",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/f_35a_lightning_ii",
+    "_to": "DefensiveSystem/def_ale47",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/f_16c_fighting_falcon",
+    "_to": "DefensiveSystem/def_alq184",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/f_16c_fighting_falcon",
+    "_to": "DefensiveSystem/def_ale47",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/su_57_felon",
+    "_to": "DefensiveSystem/def_l402_himalayas",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/su_57_felon",
+    "_to": "DefensiveSystem/def_app50",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/su_35s_flanker_e",
+    "_to": "DefensiveSystem/def_khibiny_l175m",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/su_35s_flanker_e",
+    "_to": "DefensiveSystem/def_app50",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/j_20_mighty_dragon",
+    "_to": "DefensiveSystem/def_j20_ews",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/j_20_mighty_dragon",
+    "_to": "DefensiveSystem/def_bmkz",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/jf_17_block_3_thunder",
+    "_to": "DefensiveSystem/def_kg600",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/jf_17_block_3_thunder",
+    "_to": "DefensiveSystem/def_bmkz",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/eurofighter_typhoon",
+    "_to": "DefensiveSystem/def_praetorian_dass",
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "ElectronicWarfare/dassault_rafale",
+    "_to": "DefensiveSystem/def_spectra",
+    "provenance": "baseline_reference"
+   }
+  ],
+  "carries_weapon": [
+   {
+    "_from": "Armament/f_22a_raptor",
+    "_to": "Weapon/weapon_aim120c7",
+    "integration_status": "Operational",
+    "qty_typical": 6,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_22a_raptor",
+    "_to": "Weapon/weapon_aim9x",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_35a_lightning_ii",
+    "_to": "Weapon/weapon_aim120c7",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_35a_lightning_ii",
+    "_to": "Weapon/weapon_aim9x",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_35a_lightning_ii",
+    "_to": "Weapon/weapon_gbu39",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_35a_lightning_ii",
+    "_to": "Weapon/weapon_gbu31",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_16c_fighting_falcon",
+    "_to": "Weapon/weapon_aim120c7",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_16c_fighting_falcon",
+    "_to": "Weapon/weapon_aim9x",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_16c_fighting_falcon",
+    "_to": "Weapon/weapon_gbu31",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/f_16c_fighting_falcon",
+    "_to": "Weapon/weapon_gbu39",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/su_57_felon",
+    "_to": "Weapon/weapon_r77m",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/su_57_felon",
+    "_to": "Weapon/weapon_r73",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/su_57_felon",
+    "_to": "Weapon/weapon_r37m",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/su_57_felon",
+    "_to": "Weapon/weapon_kh38",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/su_35s_flanker_e",
+    "_to": "Weapon/weapon_r77m",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/su_35s_flanker_e",
+    "_to": "Weapon/weapon_r73",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/su_35s_flanker_e",
+    "_to": "Weapon/weapon_r37m",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/j_20_mighty_dragon",
+    "_to": "Weapon/weapon_pl15",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/j_20_mighty_dragon",
+    "_to": "Weapon/weapon_pl10",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/jf_17_block_3_thunder",
+    "_to": "Weapon/weapon_pl5e",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/jf_17_block_3_thunder",
+    "_to": "Weapon/weapon_sd10",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/eurofighter_typhoon",
+    "_to": "Weapon/weapon_meteor",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/eurofighter_typhoon",
+    "_to": "Weapon/weapon_asraam",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/dassault_rafale",
+    "_to": "Weapon/weapon_mica",
+    "integration_status": "Operational",
+    "qty_typical": 4,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Armament/dassault_rafale",
+    "_to": "Weapon/weapon_meteor",
+    "integration_status": "Operational",
+    "qty_typical": 2,
+    "provenance": "baseline_reference"
+   }
+  ],
+  "operated_by": [
+   {
+    "_from": "Operators/f_22a_raptor",
+    "_to": "Country/country_usa",
+    "variant": "F-22A",
+    "quantity_est": 186,
+    "since_year": 2005,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_usa",
+    "variant": "F-35A",
+    "quantity_est": 450,
+    "since_year": 2016,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_uk",
+    "variant": "F-35A",
+    "quantity_est": 40,
+    "since_year": 2018,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_italy",
+    "variant": "F-35A",
+    "quantity_est": 30,
+    "since_year": 2018,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_netherlands",
+    "variant": "F-35A",
+    "quantity_est": 24,
+    "since_year": 2019,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_australia",
+    "variant": "F-35A",
+    "quantity_est": 60,
+    "since_year": 2018,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_norway",
+    "variant": "F-35A",
+    "quantity_est": 40,
+    "since_year": 2017,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_israel",
+    "variant": "F-35A",
+    "quantity_est": 33,
+    "since_year": 2016,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_japan",
+    "variant": "F-35A",
+    "quantity_est": 40,
+    "since_year": 2019,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_south_korea",
+    "variant": "F-35A",
+    "quantity_est": 40,
+    "since_year": 2019,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_35a_lightning_ii",
+    "_to": "Country/country_poland",
+    "variant": "F-35A",
+    "quantity_est": 32,
+    "since_year": 2024,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_usa",
+    "variant": "F-16C Block 50/52",
+    "quantity_est": 700,
+    "since_year": 1978,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_israel",
+    "variant": "F-16C/D",
+    "quantity_est": 175,
+    "since_year": 1987,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_egypt",
+    "variant": "F-16C/D",
+    "quantity_est": 220,
+    "since_year": 1982,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_turkey",
+    "variant": "F-16C/D",
+    "quantity_est": 245,
+    "since_year": 1987,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_greece",
+    "variant": "F-16C/D",
+    "quantity_est": 154,
+    "since_year": 1988,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_poland",
+    "variant": "F-16C/D Block 52+",
+    "quantity_est": 48,
+    "since_year": 2006,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_south_korea",
+    "variant": "KF-16C/D",
+    "quantity_est": 160,
+    "since_year": 1986,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_taiwan",
+    "variant": "F-16A/B upgraded to V",
+    "quantity_est": 143,
+    "since_year": 1997,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_chile",
+    "variant": "F-16C/D Block 50",
+    "quantity_est": 10,
+    "since_year": 2006,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/f_16c_fighting_falcon",
+    "_to": "Country/country_jordan",
+    "variant": "F-16A/B/C/D",
+    "quantity_est": 63,
+    "since_year": 1997,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/su_57_felon",
+    "_to": "Country/country_russia",
+    "variant": "Su-57",
+    "quantity_est": 30,
+    "since_year": 2020,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/su_35s_flanker_e",
+    "_to": "Country/country_russia",
+    "variant": "Su-35S",
+    "quantity_est": 100,
+    "since_year": 2014,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/su_35s_flanker_e",
+    "_to": "Country/country_china",
+    "variant": "Su-35SK",
+    "quantity_est": 24,
+    "since_year": 2018,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/su_35s_flanker_e",
+    "_to": "Country/country_egypt",
+    "variant": "Su-35S",
+    "quantity_est": 24,
+    "since_year": 2024,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/su_35s_flanker_e",
+    "_to": "Country/country_iran",
+    "variant": "Su-35S",
+    "quantity_est": 24,
+    "since_year": 2025,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/su_35s_flanker_e",
+    "_to": "Country/country_algeria",
+    "variant": "Su-35S",
+    "quantity_est": 14,
+    "since_year": 2019,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/j_20_mighty_dragon",
+    "_to": "Country/country_china",
+    "variant": "J-20",
+    "quantity_est": 250,
+    "since_year": 2017,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/jf_17_block_3_thunder",
+    "_to": "Country/country_pakistan",
+    "variant": "JF-17 Block 3",
+    "quantity_est": 150,
+    "since_year": 2007,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/jf_17_block_3_thunder",
+    "_to": "Country/country_myanmar",
+    "variant": "JF-17 Block 2",
+    "quantity_est": 16,
+    "since_year": 2018,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/jf_17_block_3_thunder",
+    "_to": "Country/country_nigeria",
+    "variant": "JF-17 Block 2",
+    "quantity_est": 6,
+    "since_year": 2021,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_uk",
+    "variant": "Typhoon",
+    "quantity_est": 160,
+    "since_year": 2003,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_germany",
+    "variant": "Typhoon",
+    "quantity_est": 138,
+    "since_year": 2004,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_italy",
+    "variant": "Typhoon",
+    "quantity_est": 96,
+    "since_year": 2004,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_spain",
+    "variant": "Typhoon",
+    "quantity_est": 73,
+    "since_year": 2004,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_austria",
+    "variant": "Typhoon",
+    "quantity_est": 15,
+    "since_year": 2007,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_saudi_arabia",
+    "variant": "Typhoon",
+    "quantity_est": 72,
+    "since_year": 2009,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_oman",
+    "variant": "Typhoon",
+    "quantity_est": 12,
+    "since_year": 2017,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_kuwait",
+    "variant": "Typhoon",
+    "quantity_est": 28,
+    "since_year": 2020,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/eurofighter_typhoon",
+    "_to": "Country/country_qatar",
+    "variant": "Typhoon",
+    "quantity_est": 24,
+    "since_year": 2022,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/dassault_rafale",
+    "_to": "Country/country_france",
+    "variant": "Rafale C/B",
+    "quantity_est": 137,
+    "since_year": 2001,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/dassault_rafale",
+    "_to": "Country/country_egypt",
+    "variant": "Rafale EM/DM",
+    "quantity_est": 54,
+    "since_year": 2015,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/dassault_rafale",
+    "_to": "Country/country_qatar",
+    "variant": "Rafale QA/QB",
+    "quantity_est": 36,
+    "since_year": 2015,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/dassault_rafale",
+    "_to": "Country/country_india",
+    "variant": "Rafale EH/DH",
+    "quantity_est": 36,
+    "since_year": 2020,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/dassault_rafale",
+    "_to": "Country/country_greece",
+    "variant": "Rafale DM",
+    "quantity_est": 24,
+    "since_year": 2021,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/dassault_rafale",
+    "_to": "Country/country_croatia",
+    "variant": "Rafale F3-R",
+    "quantity_est": 12,
+    "since_year": 2024,
+    "provenance": "baseline_reference"
+   },
+   {
+    "_from": "Operators/dassault_rafale",
+    "_to": "Country/country_indonesia",
+    "variant": "Rafale F4",
+    "quantity_est": 6,
+    "since_year": 2026,
+    "provenance": "baseline_reference"
+   }
+  ]
+ }
+}

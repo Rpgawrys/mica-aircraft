@@ -1,0 +1,364 @@
+{
+ "graph": "aircraft_model",
+ "vertex_collections": {
+  "Platform": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "name": "str",
+    "manufacturer": "str",
+    "origin_country": "str",
+    "generation": "str",
+    "role": "str",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Performance": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "cruise_speed_kmh": "int",
+    "supercruise_kmh": "int",
+    "supercruise_capable": "bool",
+    "service_ceiling_m": "int",
+    "ferry_range_km": "int",
+    "max_speed_kmh_nominal": "int",
+    "max_speed_kmh_min": "float",
+    "max_speed_kmh_max": "float",
+    "combat_radius_km_nominal": "int",
+    "combat_radius_km_min": "float",
+    "combat_radius_km_max": "float",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Signature": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "rcs_m2_nominal": "float",
+    "rcs_m2_min": "float",
+    "rcs_m2_max": "float",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Airframe": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "empty_weight_kg": "int",
+    "mtow_kg": "int",
+    "hardpoints": "int",
+    "max_weapon_load_kg": "int",
+    "internal_weapons_bay": "bool",
+    "internal_fuel_kg": "int",
+    "fuel_consumption_cruise_kg_h": "int",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Program": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "first_flight_year": "int",
+    "in_service_year": "int",
+    "status": "str",
+    "units_produced": "int",
+    "unit_cost_m_usd": "int",
+    "cost_per_flight_hour_usd": "int",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Propulsion": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "engine_count": "int",
+    "thrust_per_engine_kn": "int",
+    "thrust_vectoring": "bool",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Sensors": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "radar_score": "float",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "ElectronicWarfare": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "ew_score": "float",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Armament": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "missile_score": "float",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Operators": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "platform": "str",
+    "number_of_operators": "int",
+    "provenance": "str"
+   },
+   "example_key": "f_22a_raptor"
+  },
+  "Engine": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "name": "str",
+    "thrust_per_engine_kn": "int",
+    "provenance": "str"
+   },
+   "example_key": "pratt_whitney_f119_pw_100"
+  },
+  "RadarSystem": {
+   "count": 9,
+   "attributes": {
+    "node_type": "str",
+    "name": "str",
+    "radar_type": "str",
+    "provenance": "str"
+   },
+   "example_key": "an_apg_77"
+  },
+  "Weapon": {
+   "count": 15,
+   "attributes": {
+    "node_type": "str",
+    "name": "str",
+    "weapon_type": "str",
+    "guidance": "str",
+    "range_km": "int",
+    "warhead_kg": "int",
+    "origin_country": "str",
+    "provenance": "str"
+   },
+   "example_key": "weapon_aim120c7"
+  },
+  "DefensiveSystem": {
+   "count": 12,
+   "attributes": {
+    "node_type": "str",
+    "name": "str",
+    "system_type": "str",
+    "description": "str",
+    "provenance": "str"
+   },
+   "example_key": "def_alr94_ale52"
+  },
+  "Country": {
+   "count": 34,
+   "attributes": {
+    "node_type": "str",
+    "name": "str",
+    "region": "str",
+    "provenance": "str"
+   },
+   "example_key": "country_usa"
+  }
+ },
+ "edge_collections": {
+  "has_performance": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "Performance"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "has_signature": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "Signature"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "has_airframe": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "Airframe"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "has_program": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "Program"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "has_propulsion": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "Propulsion"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "has_sensors": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "Sensors"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "has_electronic_warfare": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "ElectronicWarfare"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "has_armament": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "Armament"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "has_operators": {
+   "count": 9,
+   "from": [
+    "Platform"
+   ],
+   "to": [
+    "Operators"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "equipped_engine": {
+   "count": 9,
+   "from": [
+    "Propulsion"
+   ],
+   "to": [
+    "Engine"
+   ],
+   "attributes": {
+    "count": "int",
+    "provenance": "str"
+   }
+  },
+  "equipped_radar": {
+   "count": 9,
+   "from": [
+    "Sensors"
+   ],
+   "to": [
+    "RadarSystem"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "equipped_defensive_system": {
+   "count": 16,
+   "from": [
+    "ElectronicWarfare"
+   ],
+   "to": [
+    "DefensiveSystem"
+   ],
+   "attributes": {
+    "provenance": "str"
+   }
+  },
+  "carries_weapon": {
+   "count": 25,
+   "from": [
+    "Armament"
+   ],
+   "to": [
+    "Weapon"
+   ],
+   "attributes": {
+    "integration_status": "str",
+    "qty_typical": "int",
+    "provenance": "str"
+   }
+  },
+  "operated_by": {
+   "count": 47,
+   "from": [
+    "Operators"
+   ],
+   "to": [
+    "Country"
+   ],
+   "attributes": {
+    "variant": "str",
+    "quantity_est": "int",
+    "since_year": "int",
+    "provenance": "str"
+   }
+  }
+ }
+}

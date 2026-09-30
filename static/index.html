@@ -1,0 +1,1932 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MICA - Model Interrogation &amp; Change Analysis</title>
+<style>
+  :root{
+    --ink:#1C2A33; --slate:#2E4451; --slate-hi:#3C5767; --paper:#F4F6F7;
+    --card:#FFFFFF; --line:#DCE3E7; --amber:#C97C1C; --amber-bg:#FCF3E4;
+    --green:#2F7D5F; --green-bg:#EAF5F0; --red:#A8453B; --red-bg:#FAECEA;
+    --muted:#64767F;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--paper);color:var(--ink);
+       font:15px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif}
+  header{background:var(--ink);color:#fff;padding:18px 26px}
+  header h1{margin:0;font-size:19px;font-weight:600;letter-spacing:.2px}
+  header p{margin:4px 0 0;color:#94A6B1;font-size:13px}
+  .health{float:right;font-size:12px;color:#94A6B1;text-align:right;line-height:1.7}
+  .dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+  .ok{background:#4A9B7F}.bad{background:#B5544A}
+  main{max-width:1180px;margin:0 auto;padding:24px}
+  .ask{background:var(--card);border:1px solid var(--line);border-radius:10px;
+       padding:18px 20px;margin-bottom:20px}
+  .row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+  label{display:block;font-size:12px;font-weight:600;color:var(--muted);
+        margin-bottom:5px;text-transform:uppercase;letter-spacing:.4px}
+  select,input[type=text]{padding:9px 11px;border:1px solid var(--line);
+        border-radius:7px;font-size:14px;background:#fff;color:var(--ink)}
+  select{min-width:230px}
+  input[type=text]{flex:1;min-width:320px}
+  button{padding:9px 17px;border:0;border-radius:7px;background:var(--ink);
+         color:#fff;font-size:14px;font-weight:600;cursor:pointer}
+  button:hover{background:var(--slate)} button:disabled{opacity:.5;cursor:default}
+  .examples{margin-top:11px;font-size:13px;color:var(--muted)}
+  .examples a{color:var(--slate-hi);cursor:pointer;text-decoration:underline;
+              margin-right:14px;display:inline-block;margin-top:4px}
+  details{background:var(--card);border:1px solid var(--line);border-radius:10px;
+          margin-bottom:14px;overflow:hidden}
+  summary{padding:13px 18px;cursor:pointer;font-weight:600;font-size:14px;
+          display:flex;align-items:center;gap:10px;list-style:none}
+  summary::-webkit-details-marker{display:none}
+  summary::before{content:"▸";color:var(--muted);font-size:12px}
+  details[open] summary::before{content:"▾"}
+  .badge{font-size:11px;font-weight:700;padding:2px 8px;border-radius:20px;
+         text-transform:uppercase;letter-spacing:.4px}
+  .b-struct{background:#E7EDF1;color:var(--slate)}
+  .b-unstruct{background:var(--amber-bg);color:var(--amber)}
+  .body{padding:0 18px 18px}
+  pre{background:#12202A;color:#D7E3EA;padding:13px 15px;border-radius:7px;
+      overflow-x:auto;font-size:12.5px;line-height:1.5;margin:8px 0}
+  .note{font-size:13px;color:var(--muted);margin:6px 0 10px}
+  table{width:100%;border-collapse:collapse;font-size:13px;margin-top:6px}
+  th,td{text-align:left;padding:7px 9px;border-bottom:1px solid var(--line);
+        vertical-align:top}
+  th{font-size:11px;text-transform:uppercase;color:var(--muted);letter-spacing:.4px}
+  .recon{background:var(--card);border:1px solid var(--line);border-radius:10px;
+         padding:20px;margin-bottom:16px}
+  .recon h2{margin:0 0 10px;font-size:16px}
+  .sum{font-size:14.5px;line-height:1.6;margin-bottom:16px}
+  .sec{margin-bottom:14px}
+  .sec h3{font-size:11.5px;text-transform:uppercase;letter-spacing:.5px;
+          margin:0 0 6px;display:flex;align-items:center;gap:7px}
+  .pill{width:9px;height:9px;border-radius:2px;display:inline-block}
+  .sec ul{margin:0;padding-left:20px;font-size:13.5px}
+  .sec li{margin-bottom:4px}
+  .prop{border:1px solid var(--line);border-radius:9px;padding:14px 16px;
+        margin-bottom:11px;background:#FBFCFC}
+  .prop.accepted{background:var(--green-bg);border-color:#B8DBCB}
+  .prop.denied{opacity:.5}
+  .prop h4{margin:0 0 5px;font-size:14.5px}
+  .prop .meta{font-size:12px;color:var(--muted);margin-bottom:8px}
+  .prop .rat{font-size:13.5px;margin-bottom:10px}
+  .conf{font-size:11px;font-weight:700;padding:2px 7px;border-radius:4px}
+  .c-high{background:var(--green-bg);color:var(--green)}
+  .c-medium{background:var(--amber-bg);color:var(--amber)}
+  .c-low{background:var(--red-bg);color:var(--red)}
+  .btns{display:flex;gap:8px}
+  .btn-sm{padding:6px 13px;font-size:13px}
+  .accept{background:var(--green)} .accept:hover{background:#256A50}
+  .deny{background:#8A9AA3} .deny:hover{background:#76858D}
+  .undo{background:#8A9AA3}
+  .err{background:var(--red-bg);border:1px solid #E4C3BE;color:var(--red);
+       padding:11px 14px;border-radius:8px;font-size:13.5px;margin:8px 0}
+  .warn{background:var(--amber-bg);border:1px solid #EBD5AE;color:#8A5F14;
+        padding:11px 14px;border-radius:8px;font-size:13.5px;margin:8px 0}
+  .spin{display:none;color:var(--muted);font-size:13.5px;padding:14px 0}
+  .spin.on{display:block}
+  /* tabs */
+  nav.tabs{background:var(--ink);padding:0 26px;display:flex;gap:2px}
+  nav.tabs button{background:transparent;color:#94A6B1;border:0;border-radius:0;
+    padding:11px 18px;font-size:13.5px;font-weight:600;cursor:pointer;
+    border-bottom:2px solid transparent}
+  nav.tabs button:hover{color:#fff;background:rgba(255,255,255,.05)}
+  nav.tabs button.on{color:#fff;border-bottom-color:var(--amber);background:transparent}
+  .page{display:none} .page.on{display:block}
+  /* platform summary */
+  .sum-card{background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:0;margin-bottom:20px;overflow:hidden}
+  .sum-head{padding:14px 20px;border-bottom:1px solid var(--line);
+    display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .sum-head h2{margin:0;font-size:18px}
+  .sum-head .sub{font-size:13px;color:var(--muted)}
+  .sum-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(228px,1fr));gap:0}
+  .sum-col{padding:14px 20px;border-right:1px solid var(--line);
+           border-bottom:1px solid var(--line)}
+  .sum-col h4{margin:0 0 9px;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.5px;color:var(--muted)}
+  .kv{display:flex;justify-content:space-between;gap:10px;font-size:13px;
+      padding:3px 0;border-bottom:1px dotted #EDF1F3}
+  .kv:last-child{border-bottom:0}
+  .kv .k{color:var(--muted)} .kv .v{font-weight:600;text-align:right}
+  .chip{display:inline-block;font-size:11.5px;background:#EDF2F5;color:var(--slate);
+    border-radius:4px;padding:2px 7px;margin:2px 3px 2px 0}
+  .chip.ev{background:var(--green-bg);color:var(--green)}
+  /* overview */
+  .ov-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:12px;margin-bottom:18px}
+  .stat{background:var(--card);border:1px solid var(--line);border-radius:10px;
+        padding:14px 16px}
+  .stat .n{font-size:26px;font-weight:700;line-height:1.15}
+  .stat .l{font-size:11.5px;color:var(--muted);margin-top:3px}
+  .stat.amber .n{color:var(--amber)} .stat.slate .n{color:var(--slate)}
+  .graph-wrap{background:var(--card);border:1px solid var(--line);
+    border-radius:10px;padding:0;margin-bottom:18px;overflow:hidden}
+  .graph-head{padding:13px 20px;border-bottom:1px solid var(--line);
+    display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px}
+  .graph-head h3{margin:0;font-size:15px}
+  .legend{font-size:12px;color:var(--muted);display:flex;gap:14px;flex-wrap:wrap}
+  .legend i{display:inline-block;width:9px;height:9px;border-radius:50%;margin-right:5px}
+  #graph{display:block;width:100%;height:520px;background:#FBFCFD}
+  .unmatched{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 20px}
+  .unmatched h3{margin:0 0 4px;font-size:15px}
+  /* architecture */
+  #arch{display:block;width:100%;height:360px;background:#FBFCFD}
+  .agent-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:14px}
+  .acard{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px 18px}
+  .acard .tag{display:inline-block;font-size:10.5px;font-weight:700;letter-spacing:.5px;
+    text-transform:uppercase;padding:2px 8px;border-radius:20px;margin-bottom:8px}
+  .a1{background:#E7EDF1;color:#2E4451}
+  .a2{background:var(--amber-bg);color:var(--amber)}
+  .a3{background:var(--green-bg);color:var(--green)}
+  .acard h4{margin:0 0 7px;font-size:15px}
+  .acard p{margin:0 0 9px;font-size:13.5px;line-height:1.5;color:#3A4A54}
+  .acard .meta{font-size:12px;color:var(--muted);border-top:1px dotted var(--line);
+    padding-top:8px;margin-top:2px}
+  .acard .meta div{padding:2px 0}
+  .acard code{background:#F0F4F6;padding:1px 5px;border-radius:4px;font-size:11.5px}
+  /* updates */
+  .bar{background:var(--card);border:1px solid var(--line);border-radius:10px;
+       padding:16px 20px;margin-bottom:16px}
+  .bar .row2{display:flex;align-items:center;gap:16px;flex-wrap:wrap}
+  .meter{flex:1;min-width:220px;height:9px;background:#E9EEF1;border-radius:6px;overflow:hidden}
+  .meter i{display:block;height:100%;background:var(--green)}
+  /* presence, not a count: a number here invited comparison with the document
+     counts inside the tab, which measure a different population */
+  #pendBadge{display:none;width:8px;height:8px;border-radius:50%;
+    background:var(--amber);margin-left:7px;vertical-align:middle}
+  #pendBadge.on{display:inline-block}
+  .runlog{font-family:ui-monospace,Menlo,monospace;font-size:12px;color:var(--muted);
+    background:#F7F9FA;border-radius:8px;padding:10px 13px;margin-top:12px;white-space:pre-wrap}
+  /* interrogation layout: answer left, platform data in a collapsible right pane */
+  .ask-layout{display:flex;gap:18px;align-items:flex-start}
+  .ask-main{flex:1;min-width:0}
+  .ask-side{flex:0 0 336px;position:sticky;top:14px;max-height:calc(100vh - 28px);
+    overflow-y:auto;overflow-x:hidden}
+  .ask-side.min{flex:0 0 42px;overflow:visible}
+  .ask-side.min .side-body{display:none}
+  .side-tog{width:100%;padding:8px 10px;font-size:12px;font-weight:600;
+    background:#E7EDF1;color:var(--slate);border-radius:7px;margin-bottom:10px}
+  .side-tog:hover{background:#D9E2E8}
+  .ask-side.min .side-tog{writing-mode:vertical-rl;padding:16px 11px;
+    white-space:nowrap;width:auto;margin-bottom:0}
+  .ask-side .sum-card{margin-bottom:0}
+  .ask-side .sum-grid{grid-template-columns:1fr}
+  .ask-side .sum-col{border-right:0}
+  .ask-side .sum-col:last-child{border-bottom:0}
+  .ask-side .sum-head h2{font-size:16px}
+  @media (max-width:900px){
+    .ask-layout{display:block}
+    .ask-side{position:static;max-height:none;margin-top:18px}
+    .ask-side.min .side-tog{writing-mode:horizontal-tb;width:100%;padding:8px 10px}
+  }
+  /* the answer */
+  .answer{background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:20px 22px;margin-bottom:16px;border-top:3px solid var(--green)}
+  .answer > h2{margin:0 0 3px;font-size:12px;text-transform:uppercase;
+    letter-spacing:.5px;color:var(--muted)}
+  .answer .qline{font-size:13px;color:var(--muted);margin-bottom:14px}
+  .md{font-size:15px;line-height:1.62}
+  .md p{margin:0 0 10px}
+  .md p:last-child{margin-bottom:0}
+  .md ul,.md ol{margin:0 0 10px;padding-left:22px}
+  .md li{margin-bottom:4px}
+  .md h3{font-size:14.5px;margin:16px 0 6px}
+  .md h4,.md h5,.md h6{font-size:13.5px;margin:14px 0 5px}
+  .md code{background:#F0F4F6;padding:1px 5px;border-radius:4px;font-size:12.5px}
+  .md > :first-child{margin-top:0}
+  .trace{font-size:12px;text-transform:uppercase;letter-spacing:.5px;
+    color:var(--muted);font-weight:600;margin:20px 0 9px}
+  details.work summary{font-size:13.5px;color:var(--slate);font-weight:600}
+  details.work .body{padding:0 18px 16px}
+  .sec-title{font-size:12px;text-transform:uppercase;letter-spacing:.6px;
+    font-weight:700;color:var(--slate);margin:0 0 4px;
+    padding-bottom:7px;border-bottom:2px solid var(--line)}
+  #arch2{display:block;width:100%;height:336px;background:#FBFCFD}
+  .seg{display:inline-flex;background:#E7EDF1;border-radius:8px;padding:3px;margin-bottom:18px}
+  .seg button{background:transparent;color:var(--slate);font-size:13px;
+    padding:6px 16px;border-radius:6px}
+  .seg button:hover{background:rgba(255,255,255,.6)}
+  .seg button.on{background:#fff;color:var(--ink);box-shadow:0 1px 2px rgba(0,0,0,.10)}
+  #cloud{display:block;width:100%;height:410px;background:#FBFCFD}
+  .mini{width:100%;border-collapse:collapse;font-size:13px}
+  .mini th,.mini td{padding:6px 9px;border-bottom:1px solid var(--line)}
+  .mini th{font-size:10.5px;text-transform:uppercase;color:var(--muted);letter-spacing:.4px}
+  .mini td.n{text-align:right;font-variant-numeric:tabular-nums}
+  .bar2{height:7px;border-radius:4px;background:#E9EEF1;overflow:hidden;min-width:90px}
+  .bar2 i{display:block;height:100%;background:var(--slate)}
+  .auto{background:var(--card);border:1px solid var(--line);border-radius:10px;
+    padding:16px 20px;margin-bottom:16px}
+  .auto.on{border-color:#B8DBCB;background:var(--green-bg)}
+  .autohead{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+  .autohead h3{margin:0;font-size:15px;flex:1;min-width:200px}
+  .sw{position:relative;width:46px;height:26px;flex:0 0 46px;cursor:pointer;
+    background:#C3CFD6;border-radius:20px;transition:background .15s;border:0;padding:0}
+  .sw:hover{background:#B2C0C9}
+  .sw.on{background:var(--green)} .sw.on:hover{background:#256A50}
+  .sw i{position:absolute;top:3px;left:3px;width:20px;height:20px;border-radius:50%;
+    background:#fff;transition:left .15s;box-shadow:0 1px 3px rgba(0,0,0,.25)}
+  .sw.on i{left:23px}
+  .rep{border:1px solid var(--line);border-radius:9px;padding:13px 16px;
+    margin-bottom:10px;background:#FBFCFC}
+  .rep h4{margin:0 0 4px;font-size:14px}
+  .rep .meta{font-size:12px;color:var(--muted)}
+  .rep .pf{font-size:13px;margin-top:9px;padding-top:9px;border-top:1px dotted var(--line)}
+  .rep .pf b{font-weight:600}
+  .auto{margin-bottom:0}
+  .autohead h3{font-size:15px}
+  .autosec{margin-top:16px;padding-top:14px;border-top:1px solid var(--line)}
+  .autosec h4{margin:0 0 3px;font-size:10.5px;text-transform:uppercase;
+    letter-spacing:.5px;color:var(--muted)}
+  .swrow{display:flex;align-items:center;gap:11px;padding:5px 0;font-size:13.5px}
+  .swrow span{flex:1}
+  .aarow{display:flex;gap:26px;flex-wrap:wrap}
+  .aarow .swrow span{flex:0 0 auto}
+  #revStats{grid-template-columns:repeat(auto-fit,minmax(132px,1fr));gap:10px}
+  #revStats .stat{padding:12px 13px}
+  #revStats .stat .n{font-size:22px}
+  #revStats .stat .l{font-size:11px}
+  .landed{margin-top:11px;padding:12px 14px;background:#fff;border:1px solid #B8DBCB;
+    border-radius:8px}
+  .landed .lrow{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:9px}
+  .landed .btn-sm{padding:5px 12px;font-size:12.5px}
+  .open{background:var(--slate)} .open:hover{background:var(--slate-hi)}
+  .copy{background:#8A9AA3} .copy:hover{background:#76858D}
+  .landed select{font-size:12.5px;padding:5px 9px;min-width:0}
+  .landed .anchor{font-family:ui-monospace,Menlo,monospace;font-size:12px;
+    color:var(--muted)}
+  .landed pre{margin:9px 0 0;font-size:11.5px;max-height:180px;overflow:auto}
+  .tgt{font-size:12.5px;color:var(--muted);margin:2px 0 8px}
+  .tgt a{color:var(--slate-hi);text-decoration:underline;cursor:pointer;
+    font-family:ui-monospace,Menlo,monospace;font-size:12px}
+  .tgt a:hover{color:var(--ink)}
+  .src{margin-top:10px;padding:12px 14px;background:#FBFCFC;
+    border:1px solid var(--line);border-radius:8px}
+  .src h5{margin:0 0 6px;font-size:12.5px}
+  .src .doc{white-space:pre-wrap;font-size:12.5px;line-height:1.55;max-height:300px;
+    overflow:auto;background:#fff;border:1px solid var(--line);border-radius:6px;
+    padding:10px 12px}
+  .src .chunk{margin-top:9px;padding-top:9px;border-top:1px dotted var(--line)}
+  .sw.sm{width:38px;height:22px;flex:0 0 38px}
+  .sw.sm i{width:16px;height:16px;top:3px;left:3px}
+  .sw.sm.on i{left:19px}
+  .sw.warn{background:var(--amber)} .sw.warn:hover{background:#B06D14}
+  #updSide{flex:0 0 320px}
+  /* deployment switch */
+  .gear{float:right;background:transparent;color:#94A6B1;font-size:19px;padding:2px 8px;
+    margin-left:14px;line-height:1.2}
+  .gear:hover{background:rgba(255,255,255,.10);color:#fff}
+  .health a{color:#94A6B1;text-decoration:underline dotted;cursor:pointer}
+  .health a:hover{color:#fff}
+  .modal{display:none;position:fixed;inset:0;background:rgba(18,32,42,.55);z-index:50;
+    padding:34px 18px;overflow:auto}
+  .modal.on{display:block}
+  .sheet{background:var(--card);max-width:640px;margin:0 auto;border-radius:12px;
+    padding:24px 26px;box-shadow:0 12px 40px rgba(0,0,0,.28)}
+  .sheet h2{margin:0 0 4px;font-size:18px}
+  .pcards{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;margin-top:16px}
+  .pcard{text-align:left;background:#FBFCFC;border:1px solid var(--line);border-radius:9px;
+    padding:14px 16px;color:var(--ink);font-weight:400;cursor:pointer;display:block}
+  .pcard:hover{background:#F4F7F8}
+  .pcard.on{border-color:var(--slate);box-shadow:inset 0 0 0 1px var(--slate);background:#fff}
+  .pcard.pick{border-color:var(--amber);box-shadow:inset 0 0 0 1px var(--amber)}
+  .pcard .ph{display:flex;align-items:baseline;gap:8px;margin-bottom:2px}
+  .pcard .ph b{font-size:15px}
+  .pcard .cur{font-size:10.5px;font-weight:700;letter-spacing:.4px;text-transform:uppercase;
+    color:var(--green);background:var(--green-bg);padding:1px 7px;border-radius:20px}
+  .pcard .host{font-family:ui-monospace,Menlo,monospace;font-size:11.5px;color:var(--muted);
+    margin-bottom:10px;word-break:break-all}
+  .tline{font-size:12.5px;padding:2px 0;display:flex;gap:8px;align-items:baseline}
+  .tline b{min-width:64px;font-weight:600;color:var(--slate)}
+  .tline .dot{margin-right:0}
+  .tline .d{color:var(--muted)}
+  .srow{display:flex;gap:8px;align-items:center;margin-top:18px}
+</style>
+</head>
+<body>
+<header>
+  <button class="gear" onclick="openProfile()" title="Switch deployment" aria-label="Switch deployment">⚙</button>
+  <div class="health" id="health"></div>
+  <h1>MICA</h1>
+  <p>Model Interrogation &amp; Change Analysis</p>
+</header>
+
+<nav class="tabs">
+  <button id="tab-ask" class="on" onclick="showTab('ask')">Model Interrogation</button>
+  <button id="tab-overview" onclick="showTab('overview')">Data overview</button>
+  <button id="tab-updates" onclick="showTab('updates')">Agentic change detection <span id="pendBadge" title="Suggested changes are waiting for review"></span></button>
+  <button id="tab-arch" onclick="showTab('arch')">How it works</button>
+</nav>
+
+<div class="modal" id="profileModal" onclick="if(event.target===this)closeProfile()">
+ <div class="sheet">
+  <h2>Deployment</h2>
+  <div class="note" style="margin:0 0 4px">Every agent moves together: the model, the source
+    corpus, the GraphRAG retriever and the AQL service. Switching re-reads the schema from
+    the chosen graph.</div>
+  <div class="pcards" id="pcards"></div>
+  <div id="profileMsg"></div>
+  <div class="srow">
+    <span class="note" style="margin:0;flex:1" id="profileHint"></span>
+    <button class="btn-sm deny" onclick="closeProfile()">Cancel</button>
+    <button class="btn-sm accept" id="profileGo" onclick="switchProfile()" disabled>Switch</button>
+  </div>
+ </div>
+</div>
+
+<main>
+<div class="page on" id="page-ask">
+ <div class="ask-layout">
+  <div class="ask-main">
+  <div class="ask">
+    <div class="row">
+      <div>
+        <label for="platform">Platform</label>
+        <select id="platform"></select>
+      </div>
+      <div id="aqlModeWrap" style="display:none">
+        <label for="aqlMode">Query strategy</label>
+        <select id="aqlMode" style="min-width:150px"></select>
+      </div>
+      <div id="corpusModeWrap" style="display:none">
+        <label for="corpusMode">Corpus strategy</label>
+        <select id="corpusMode" style="min-width:165px"></select>
+      </div>
+      <div style="flex:1">
+        <label for="q">Question</label>
+        <input type="text" id="q" placeholder="Ask about this platform…"
+               onkeydown="if(event.key==='Enter')ask()">
+      </div>
+      <button id="askBtn" onclick="ask()">Ask</button>
+    </div>
+    <div class="examples" id="examples"></div>
+  </div>
+      <div class="spin" id="spin">Querying the model, reading the documents, then comparing them…</div>
+      <div id="out"></div>
+      <div class="note" id="askHint">Pick a platform, ask a question, and the three agents run in order.</div>
+  </div>
+  <aside class="ask-side" id="askSide">
+    <button class="side-tog" id="sideTog" onclick="toggleSide()">Hide platform data</button>
+    <div class="side-body" id="platformSummary"></div>
+  </aside>
+ </div>
+</div>
+
+<div class="page" id="page-overview">
+  <div class="seg">
+    <button id="ov-model" class="on" onclick="showOv('model')">The model</button>
+    <button id="ov-corpus" onclick="showOv('corpus')">Source corpus</button>
+  </div>
+
+  <div id="ovView-model">
+    <div class="ov-stats" id="ovStats"></div>
+    <div class="graph-wrap">
+      <div class="graph-head">
+        <h3>What the model holds for one platform</h3>
+        <div class="legend">
+          <span><i style="background:#1C2A33"></i>Platform</span>
+          <span><i style="background:#2E4451"></i>Category</span>
+          <span><i style="background:#4A7C8C"></i>Shared entity</span>
+        </div>
+      </div>
+      <svg id="graph"></svg>
+    </div>
+    <div class="unmatched" id="modelTables"></div>
+  </div>
+
+  <div id="ovView-corpus" style="display:none">
+    <div class="ov-stats" id="corpStats"></div>
+    <div class="graph-wrap">
+      <div class="graph-head">
+        <h3>Every source document, one dot each, grouped by the platform it names</h3>
+        <div class="legend" id="cloudLegend"></div>
+      </div>
+      <svg id="cloud"></svg>
+    </div>
+    <div class="unmatched" id="corpTable"></div>
+  </div>
+</div>
+
+<div class="page" id="page-updates">
+ <div class="ask-layout">
+  <div class="ask-main">
+    <div class="auto" id="autoCard">
+      <div class="autohead">
+        <button class="sw" id="autoSw" onclick="toggleAuto()" aria-label="auto agent"><i></i></button>
+        <h3>Auto Agent Change detection</h3>
+        <select id="autoEvery" onchange="saveAuto()" style="min-width:150px">
+          <option value="24">Once a day</option>
+          <option value="12">Every 12 hours</option>
+          <option value="6">Every 6 hours</option>
+          <option value="1">Every hour</option>
+        </select>
+        <button class="btn-sm" id="sweepBtn" onclick="sweepNow()">Run a sweep now</button>
+      </div>
+      <div class="note" id="autoNote" style="margin:10px 0 0"></div>
+
+      <div style="margin-top:16px">
+        <label>Source documents reviewed across every platform</label>
+        <div class="row2">
+          <div class="meter"><i id="meterFill" style="width:0%"></i></div>
+          <span id="meterTxt" class="note" style="white-space:nowrap;margin:0"></span>
+        </div>
+      </div>
+      <div id="revStats" class="ov-stats" style="margin:12px 0 0"></div>
+
+      <div class="autosec">
+        <h4>Accept without asking</h4>
+        <div class="note" style="margin:0 0 10px">The agent writes these to the graph
+          itself, stamped <code>accepted_by: auto_agent</code>. Anything left off stays
+          in the queue for you.</div>
+        <div class="aarow">
+          <div class="swrow">
+            <button class="sw sm" id="aaHigh" onclick="toggleAA('high')"
+                    aria-label="auto accept high"><i></i></button>
+            <span><b>High</b> confidence</span>
+          </div>
+          <div class="swrow">
+            <button class="sw sm" id="aaMedium" onclick="toggleAA('medium')"
+                    aria-label="auto accept medium"><i></i></button>
+            <span><b>Medium</b> confidence</span>
+          </div>
+          <div class="swrow">
+            <button class="sw sm" id="aaLow" onclick="toggleAA('low')"
+                    aria-label="auto accept low"><i></i></button>
+            <span><b>Low</b> confidence</span>
+          </div>
+        </div>
+        <div id="aaWarn"></div>
+      </div>
+    </div>
+
+    <div id="reportList"></div>
+    <div id="acceptedList"></div>
+    <div id="pendingList"></div>
+  </div>
+
+  <aside class="ask-side" id="updSide">
+    <div class="bar" style="margin-bottom:0">
+      <h3 style="margin:0 0 4px;font-size:15px">Manual change detection</h3>
+      <div class="note" style="margin:0 0 12px">Check one platform now instead of
+        waiting for the agent's next sweep.</div>
+      <label for="updPlatform">Platform</label>
+      <select id="updPlatform" style="width:100%;min-width:0"></select>
+      <button id="checkBtn" onclick="checkUpdates()"
+              style="width:100%;margin-top:10px">Run change detection</button>
+      <div id="platBacklog" style="margin-top:12px"></div>
+      <div id="runlog"></div>
+    </div>
+  </aside>
+ </div>
+</div>
+
+<div class="page" id="page-arch">
+  <div class="sec-title">1 · Interrogation</div>
+  <div class="note" style="margin:0 0 14px">
+    You ask one question. Two agents answer it from different places, and a third
+    says where they agree, where they differ, and what the model is missing.
+  </div>
+  <div class="graph-wrap">
+    <div class="graph-head">
+      <h3>How a question gets answered</h3>
+      <div class="legend">
+        <span><i style="background:#2E4451"></i>Structured path</span>
+        <span><i style="background:#C97C1C"></i>Unstructured path</span>
+        <span><i style="background:#2F7D5F"></i>Reconciliation</span>
+      </div>
+    </div>
+    <svg id="arch"></svg>
+  </div>
+  <div class="agent-cards">
+    <div class="acard">
+      <span class="tag a1">Agent 1</span>
+      <h4>Query the model of record</h4>
+      <p><b>Goal:</b> answer only from what the model holds, and show you the query it ran
+         so you can check the answer yourself.</p>
+      <p>It turns your question into AQL, runs it, and shows you the query. It never reads
+         a source document, so everything it returns already sits in the model.</p>
+      <div class="meta">
+        <div>Model: <code id="mdl-a1">…</code>, grounded in the live schema</div>
+        <div>Reads: <code>aircraft_model</code> graph via <code>/_api/cursor</code></div>
+        <div>Guard: it checks the AQL is read-only and valid before running it</div>
+      </div>
+    </div>
+    <div class="acard">
+      <span class="tag a2">Agent 2</span>
+      <h4>Ask the source material</h4>
+      <p><b>Goal:</b> find what the source documents say about the same question,
+         including claims nobody has added to the model.</p>
+      <p>It sends your exact question to ArangoDB's GraphRAG retriever, which searches the
+         document corpus and cites what it used.</p>
+      <div class="meta">
+        <div>Model: <code>gpt-5.4</code> (ArangoDB-hosted retriever)</div>
+        <div>Reads: <code>Aircraft KG Strong</code> corpus via <code>/v1/graphrag-query</code></div>
+        <div>Guard: a hedged source stays hedged. It never promotes a claim to fact</div>
+      </div>
+    </div>
+    <div class="acard">
+      <span class="tag a3">Agent 3</span>
+      <h4>Reconcile and propose</h4>
+      <p><b>Goal:</b> separate what the model already holds from what only the documents
+         carry, then propose specific edits.</p>
+      <p>It reads both answers and writes edit operations the app can apply. When the corpus
+         is unreachable it proposes nothing and tells you why.</p>
+      <div class="meta">
+        <div>Model: <code id="mdl-a3">…</code></div>
+        <div>Writes: only on analyst approval, via <code>/_api/gharial</code></div>
+        <div>Guard: it adds rather than overwrites, and never changes a baseline value on its own</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="sec-title" style="margin-top:34px">2 · Agentic change detection</div>
+  <div class="note" style="margin:0 0 14px">
+    Interrogation waits for you to ask. Change detection does not. A fourth agent works
+    the backlog of source documents nobody has reviewed and tells you which ones move the
+    model. Every document ends in one of five states, so you always know what is left.
+  </div>
+  <div class="graph-wrap">
+    <div class="graph-head">
+      <h3>How a source document becomes a model change</h3>
+      <div class="legend">
+        <span><i style="background:#2E4451"></i>Agent step</span>
+        <span><i style="background:#C97C1C"></i>Waiting on you</span>
+        <span><i style="background:#2F7D5F"></i>Written to the model</span>
+      </div>
+    </div>
+    <svg id="arch2"></svg>
+  </div>
+  <div class="agent-cards">
+    <div class="acard">
+      <span class="tag a1">Step 1 · Detect</span>
+      <h4>Find what nobody has reviewed</h4>
+      <p>The agent lists every document in the corpus and subtracts the ones already
+         marked reviewed. What remains is the backlog for the platform you picked.</p>
+      <p>When the backlog is empty the agent stops here. It does not call a model, and
+         it does not bill you for a run that had nothing to read.</p>
+      <div class="meta">
+        <div>Watermark: <code>ReviewedDocument</code> in the structured database</div>
+        <div>Reads: <code>Aircraft-corpus_sources</code></div>
+      </div>
+    </div>
+    <div class="acard">
+      <span class="tag a1">Step 2 · Compare</span>
+      <h4>Read the documents against the model</h4>
+      <p>The agent pulls the model's current state for that platform, including the real
+         node keys, and hands both to Claude with the document text.</p>
+      <p>A document that restates what the model already holds counts as corroboration.
+         The agent proposes nothing, and the document closes as reviewed.</p>
+      <div class="meta">
+        <div>Model: <code id="mdl-a4">…</code></div>
+        <div>Guard: proposals must target a collection the schema defines</div>
+        <div>Guard: node keys come from the model, never from the agent</div>
+      </div>
+    </div>
+    <div class="acard">
+      <span class="tag a2">Step 3 · Queue</span>
+      <h4>Hold the change for you</h4>
+      <p>Each proposal lands in a durable queue with its source document, its confidence,
+         and the exact graph operation it will run. The document gets its watermark.</p>
+      <p>The queue survives a restart. You can walk away mid-review and the backlog counts
+         still add up when you come back.</p>
+      <div class="meta">
+        <div>Queue: <code>UpdateProposal</code>, status <code>pending</code></div>
+        <div>Badge on the tab counts what is waiting</div>
+      </div>
+    </div>
+    <div class="acard">
+      <span class="tag a3">Step 4 · Decide</span>
+      <h4>Accept or reject, then the counts move</h4>
+      <p>Accepting runs the operation through the same write path the interrogation tab
+         uses, stamped <code>evidence_accepted</code> so the source stays attached to the value.
+         Rejecting leaves the graph alone.</p>
+      <p>Either way the document is reviewed, and it moves out of the backlog into the
+         accepted or rejected count.</p>
+      <div class="meta">
+        <div>Writes: <code>/_api/gharial</code>, on your approval only</div>
+        <div>Provenance: every accepted change names the document it came from</div>
+      </div>
+    </div>
+  </div>
+</div>
+</main>
+
+<script>
+const EXAMPLES_ONE = [
+  "What electronic warfare systems does this platform carry, and is there anything new?",
+  "Is there a scheduled replacement program for any component inside its jamming pod?",
+  "What is its radar, and has anything suggested it changed?",
+  "Any reported reliability problems with its missiles?",
+  "What is its combat radius, and does any reporting dispute it?"
+];
+// Fleet-wide questions have to name what they compare, because no platform is
+// selected to supply the subject.
+const EXAMPLES_ALL = [
+  "Which platforms carry the AIM-120, and does any reporting question its performance?",
+  "Compare combat radius across every platform. Does any source dispute the recorded figures?",
+  "Which jamming pods appear across the fleet, and is any of them being replaced?",
+  "Which platforms use an AESA radar, and does any reporting suggest a change?",
+  "Where does source reporting contradict the model?"
+];
+let PLATFORMS = [];
+let ASKED = {platform:'', question:''};
+
+async function boot(){
+  const h = await (await fetch('/api/health')).json();
+  const pf = h.profile || {};
+  document.getElementById('health').innerHTML =
+    `<div><a onclick="openProfile()" title="Switch deployment">${esc(pf.label||'deployment')}</a> · ${esc(h.host||'')}</div>
+     <div><span class="dot ${h.arango?'ok':'bad'}"></span>graph: ${h.structured_db}</div>
+     <div><span class="dot ${h.autograph_configured?'ok':'bad'}"></span>corpus: ${
+       h.autograph_configured ? h.autograph_db : 'not configured'}</div>`;
+  // the "How it works" cards name whichever models are actually configured,
+  // so swapping provider never leaves stale vendor names on the page
+  const mdl = h.models || {};
+  [['mdl-a1', mdl.structured], ['mdl-a3', mdl.reconciler],
+   ['mdl-a4', mdl.update_agent]].forEach(([id, name])=>{
+    const el = document.getElementById(id);
+    if(el) el.textContent = name || 'not configured';
+  });
+  const avail = h.aql_backends_available || ['builtin'];
+  if(avail.length > 1){
+    const LBL = {builtin: 'Fast', aqlizer: 'Thorough'};
+    const sel = document.getElementById('aqlMode');
+    sel.innerHTML = avail.map(b=>
+      `<option value="${esc(b)}"${b===h.aql_backend?' selected':''}>${esc(LBL[b]||b)}</option>`).join('');
+  }
+  document.getElementById('aqlModeWrap').style.display = avail.length > 1 ? '' : 'none';
+  const strat = h.corpus_strategies || [];
+  if(strat.length){
+    const sel = document.getElementById('corpusMode');
+    sel.innerHTML = strat.map(x=>
+      `<option value="${esc(x.key)}"${x.key===h.corpus_strategy?' selected':''}>${
+        esc(x.label)} · ${esc(x.note)}</option>`).join('');
+    document.getElementById('corpusModeWrap').style.display = '';
+  }
+  PLATFORMS = await (await fetch('/api/platforms')).json();
+  const sel = document.getElementById('platform');
+  sel.innerHTML = '<option value="">All platforms</option>' +
+    PLATFORMS.map(p=>`<option value="${esc(p.name)}">${esc(p.name)}</option>`).join('');
+  const su = PLATFORMS.find(p=>p.name.indexOf('Su-35S')===0);
+  if(su) sel.value = su.name;
+  sel.onchange = ()=>{ setSide(true); applyScope(); };
+  applyScope();
+}
+
+// "All platforms" sends no platform at all, so both agents answer across the
+// whole model and the whole corpus. There is no profile to show beside that, and
+// the platform-scoped examples read wrong without a subject, so both follow the
+// picker rather than sitting there stale.
+function applyScope(){
+  const fleet = !document.getElementById('platform').value;
+  document.getElementById('askSide').style.display = fleet ? 'none' : '';
+  document.getElementById('q').placeholder = fleet
+    ? 'Ask across every platform and the whole corpus…'
+    : 'Ask about this platform…';
+  document.getElementById('askHint').textContent = fleet
+    ? 'Asking across every platform. The three agents run in order.'
+    : 'Pick a platform, ask a question, and the three agents run in order.';
+  document.getElementById('examples').innerHTML = 'Try: ' +
+    (fleet ? EXAMPLES_ALL : EXAMPLES_ONE)
+      .map(e=>`<a onclick="setQ(this)">${esc(e)}</a>`).join('');
+  if(!fleet) loadSummary();
+}
+function setQ(a){ document.getElementById('q').value = a.textContent; ask(); }
+function esc(s){ return String(s==null?'':s).replace(/[&<>"']/g,
+  c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+// The retriever answers in markdown. Escape first, then turn the marks into tags,
+// so nothing in the source text can inject HTML.
+function inl(t){
+  return esc(t)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<b>$1</b>')
+    .replace(/__([^_]+)__/g, '<b>$1</b>')
+    .replace(/(^|[\s(\[])\*([^*\n]+)\*/g, '$1<i>$2</i>');
+}
+function md(src){
+  if(src==null || src==='') return '';
+  const lines = String(src).replace(/\r/g,'').split('\n');
+  const out = []; let list = null;
+  const close = ()=>{ if(list){ out.push('</'+list+'>'); list = null; } };
+  for(const raw of lines){
+    const line = raw.trimEnd();
+    if(!line.trim()){ close(); continue; }
+    let m;
+    if((m = line.match(/^\s{0,3}(#{1,6})\s+(.*)$/))){
+      close();
+      const lvl = Math.min(m[1].length + 2, 6);
+      out.push('<h'+lvl+'>'+inl(m[2].replace(/\s*#+\s*$/,''))+'</h'+lvl+'>');
+    } else if((m = line.match(/^\s*[-*+•]\s+(.*)$/))){
+      if(list!=='ul'){ close(); out.push('<ul>'); list='ul'; }
+      out.push('<li>'+inl(m[1])+'</li>');
+    } else if((m = line.match(/^\s*\d+[.)]\s+(.*)$/))){
+      if(list!=='ol'){ close(); out.push('<ol>'); list='ol'; }
+      out.push('<li>'+inl(m[1])+'</li>');
+    } else if(/^\s*([-*_])\1{2,}\s*$/.test(line)){
+      close();
+    } else if(list){
+      out[out.length-1] = out[out.length-1].replace(/<\/li>$/, ' '+inl(line)+'</li>');
+    } else {
+      out.push('<p>'+inl(line)+'</p>');
+    }
+  }
+  close();
+  return out.join('');
+}
+
+// The platform profile sits open until you ask, then folds out of the way so the
+// answer starts at the top of the screen.
+function setSide(open){
+  const side = document.getElementById('askSide');
+  side.classList.toggle('min', !open);
+  document.getElementById('sideTog').textContent =
+    open ? 'Hide platform data' : 'Platform data';
+}
+function toggleSide(){ setSide(document.getElementById('askSide').classList.contains('min')); }
+
+async function ask(){
+  const q = document.getElementById('q').value.trim();
+  if(!q) return;
+  const platform = document.getElementById('platform').value;
+  ASKED = {platform, question:q};
+  document.getElementById('out').innerHTML = '';
+  document.getElementById('askHint').style.display = 'none';
+  setSide(false);
+  document.getElementById('spin').classList.add('on');
+  document.getElementById('askBtn').disabled = true;
+  try{
+    const r = await fetch('/api/ask', {method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({platform: platform || null, question:q,
+                            aql_backend: (document.getElementById('aqlMode')||{}).value || null,
+                            corpus_strategy: (document.getElementById('corpusMode')||{}).value || null})});
+    if(!r.ok) throw new Error(await r.text());
+    render(await r.json());
+  }catch(e){
+    document.getElementById('out').innerHTML =
+      `<div class="err">Request failed: ${esc(e.message)}</div>`;
+  }finally{
+    document.getElementById('spin').classList.remove('on');
+    document.getElementById('askBtn').disabled = false;
+  }
+}
+
+function rowsTable(rows){
+  if(!rows || !rows.length) return '<div class="note">No rows returned.</div>';
+  return `<pre>${esc(JSON.stringify(rows, null, 1))}</pre>`;
+}
+
+function render(d){
+  const s = d.structured, u = d.unstructured, r = d.reconciliation;
+  let h = '';
+
+  // agent 3 leads: this is the answer
+  h += `<div class="answer">`;
+  h += `<h2>Answer</h2>`;
+  h += `<div class="qline">${esc(ASKED.platform || 'All platforms')} · ${esc(ASKED.question)}</div>`;
+  if(r.error){
+    h += `<div class="err">${esc(r.error)}</div>`;
+  } else {
+    h += `<div class="md">${md(r.summary||'')}</div>`;
+    const secs = section('In the official model', r.official, '#2E4451')
+               + section('Corroborated by source documents', r.corroborated, '#2F7D5F')
+               + section('Not yet in the model', r.not_in_model, '#C97C1C')
+               + section('Contradictions', r.contradictions, '#A8453B');
+    if(secs) h += `<div style="margin-top:18px">${secs}</div>`;
+    if(r.proposals && r.proposals.length){
+      h += `<h2 style="margin-top:22px">Proposed model updates</h2>
+            <div class="note">Each edit needs your approval before it reaches the graph.</div>`;
+      r.proposals.forEach((p,i)=>{ h += propCard(p,i); });
+    } else {
+      h += `<div class="note" style="margin-top:16px">The agent proposed no changes.</div>`;
+    }
+  }
+  h += `</div>`;
+
+  // the two source agents sit underneath, closed
+  h += `<div class="trace">Where this came from</div>`;
+
+  h += `<details class="work"><summary><span class="badge b-struct">Agent 1 · Structured model</span>
+        ${s.error ? 'query failed' : s.row_count + ' row(s) from the official data model'}${
+          s.backend === 'aqlizer' ? ' · ArangoDB AQL service' : ''}</summary>
+        <div class="body">`;
+  if(s.fell_back) h += `<div class="warn">${esc(s.fell_back)} Answered with the fast
+        strategy instead.</div>`;
+  if(s.note) h += `<div class="note">${esc(s.note)}</div>`;
+  if(s.aql) h += `<label>Generated AQL</label><pre>${esc(s.aql)}</pre>`;
+  if(s.bind_vars && Object.keys(s.bind_vars).length)
+    h += `<label>Bind parameters</label><pre>${esc(JSON.stringify(s.bind_vars))}</pre>`;
+  if(s.error) h += `<div class="err">${esc(s.error)}</div>`;
+  else { h += `<label>Result</label>` + rowsTable(s.rows); }
+  h += `</div></details>`;
+
+  h += `<details class="work"><summary><span class="badge b-unstruct">Agent 2 · Unstructured corpus</span>
+        ${u.error ? 'unavailable' : 'GraphRAG retriever answer'}${
+          u.strategy_label ? ' · ' + esc(u.strategy_label) : ''}</summary>
+        <div class="body">`;
+  if(u.error) h += `<div class="${u.configured?'err':'warn'}">${esc(u.error)}</div>`;
+  if(u.answer) h += `<div class="md">${md(u.answer)}</div>`;
+  if(u.citations === false) h += `<div class="note" style="margin-top:12px">Deep search
+        returns no citation list. Switch to Local, Unified or Global to see sources.</div>`;
+  if(u.sources && u.sources.length){
+    h += `<label style="margin-top:14px">Cited sources</label><table><tr><th>#</th><th>Excerpt</th></tr>`;
+    u.sources.forEach(x=>{ h += `<tr><td>${esc(x.id)}</td><td>${esc(x.excerpt)}</td></tr>`; });
+    h += `</table>`;
+  }
+  h += `</div></details>`;
+
+  document.getElementById('out').innerHTML = h;
+  window._props = (r.proposals||[]);
+}
+
+function section(title, items, color){
+  if(!items || !items.length) return '';
+  return `<div class="sec"><h3><span class="pill" style="background:${color}"></span>${esc(title)}</h3>
+          <ul>${items.map(x=>`<li>${inl(String(x))}</li>`).join('')}</ul></div>`;
+}
+
+function propCard(p,i){
+  const conf = (p.confidence||'medium').toLowerCase();
+  return `<div class="prop" id="prop-card-${i}">
+    <h4>${esc(p.title||p.op)}</h4>
+    <div class="meta"><code>${esc(p.op)}</code>
+      ${p.collection?'· '+esc(p.collection):''}
+      · <span class="conf c-${esc(conf)}">${esc(conf)} confidence</span>
+      ${p.evidence?'· source: '+esc(p.evidence):''}</div>
+    <div class="rat">${inl(String(p.rationale||''))}</div>
+    <details style="margin:0 0 10px;border:0;background:transparent">
+      <summary style="padding:0;font-size:12.5px;color:#64767F">View exact change</summary>
+      <pre>${esc(JSON.stringify(p, null, 1))}</pre>
+    </details>
+    <div class="btns" id="btns-${i}">
+      <button class="btn-sm accept" onclick="accept(${i})">Accept</button>
+      <button class="btn-sm deny" onclick="deny(${i})">Reject</button>
+    </div>
+    <div id="status-${i}"></div>
+  </div>`;
+}
+
+// After a change is written, show the analyst where it landed: the collections
+// it touched, a deep link into ArangoDB, and a query that works even if the
+// deep link does not open (different host, no session, older UI).
+// Which node a change will touch, linked so you can look before you accept.
+function targetLine(targets){
+  if(!targets || !targets.length) return '';
+  return '<div class="tgt">Affects ' + targets.map(t=>
+    `<a onclick="window.open(${JSON.stringify(t.url).replace(/"/g,'&quot;')},'_blank')"
+        title="${esc(t.role)}">${esc(t.id)}</a>`).join(' and ') +
+    ' <span style="opacity:.8">· ' + esc(targets[0].role) + '</span></div>';
+}
+
+async function showSource(targetId, filename, btn){
+  const el = document.getElementById(targetId);
+  if(el.innerHTML){ el.innerHTML = ''; if(btn) btn.textContent = 'Source'; return; }
+  el.innerHTML = '<div class="note">Fetching the source document…</div>';
+  if(btn) btn.textContent = 'Hide source';
+  try{
+    const d = await (await fetch('/api/source?filename='+encodeURIComponent(filename))).json();
+    if(d.error){ el.innerHTML = `<div class="warn">${esc(d.error)}</div>`; return; }
+    const chunks = (d.chunks||[]).map(c=>`
+      <div class="chunk">
+        <div class="note" style="margin:0 0 4px">Corpus chunk ${c.order!=null?'#'+c.order:''}
+          · ${c.tokens||'?'} tokens ·
+          <a href="${esc(c.url)}" target="_blank" style="color:var(--slate-hi)">open in ArangoDB</a></div>
+        <div class="doc" style="max-height:150px">${esc(c.content)}</div>
+      </div>`).join('');
+    el.innerHTML = `<div class="src">
+      <h5>${esc(d.filename)} <span class="note" style="margin:0;font-weight:400">·
+        ${d.chars} characters · ${(d.chunks||[]).length} chunk(s) in the corpus</span></h5>
+      <div class="doc">${esc(d.content)}</div>
+      <div class="note" style="margin:8px 0 0">
+        <a href="${esc(d.source_url)}" target="_blank" style="color:var(--slate-hi)">Open this document in ArangoDB</a>
+        · corpus database <code>${esc(d.corpus_db)}</code></div>
+      ${chunks}
+    </div>`;
+  }catch(e){ el.innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+}
+
+async function showLanded(targetId, payload){
+  const el = document.getElementById(targetId);
+  el.innerHTML = '<div class="note">Locating the change in the graph…</div>';
+  try{
+    const r = await fetch('/api/change/context', {method:'POST',
+      headers:{'Content-Type':'application/json'}, body: JSON.stringify(payload)});
+    const c = await r.json();
+    if(!r.ok) throw new Error(c.detail||'failed');
+    if(!c.anchor){ el.innerHTML =
+      '<div class="note">This change has no single node to centre on.</div>'; return; }
+
+    const written = (c.written||[]).map(w=>
+      `<option>${esc(w.name)} — ${esc(w.role)}</option>`).join('');
+    const nearby = (c.nearby||[]).map(w=>
+      `<option>${esc(w.name)} — ${w.count} node(s) within 2 hops</option>`).join('');
+    const revKey = payload.key || null;
+
+    // Build the markup WITHOUT the data, then attach listeners. The graph URL and
+    // the AQL both contain quotes, and inlining either one into an onclick
+    // attribute truncates it at the first quote and kills the button.
+    el.innerHTML = `<div class="landed">
+      <div class="lrow">
+        <button class="btn-sm open" data-act="graph">Show graph</button>
+        <button class="btn-sm accept" data-act="copy">Copy query</button>
+        <button class="btn-sm open" data-act="node">Show node</button>
+        ${revKey ? '<button class="btn-sm deny" data-act="revert">Revert</button>' : ''}
+        <span class="anchor">${esc(c.anchor)}</span>
+      </div>
+      <label style="margin-bottom:4px">Collections this change affected</label>
+      <select>
+        <optgroup label="Written by this change">${written}</optgroup>
+        ${nearby ? `<optgroup label="In view around it">${nearby}</optgroup>` : ''}
+      </select>
+      <div class="note" style="margin:8px 0 0"><b>Show graph</b> sets this node as the
+        viewer's start node, then opens the graph two hops out. <b>Copy query</b> gives you
+        the same neighbourhood as AQL for the Queries tab. <b>Show node</b> opens the
+        changed document, where you can read its <code>evidence</code> and
+        <code>provenance</code> fields. All three need a signed-in ArangoDB session in
+        this browser, as the same user MICA connects with.</div>
+      <details style="margin:8px 0 0;border:0;background:transparent">
+        <summary style="padding:0;font-size:12.5px;color:#64767F">See the query</summary>
+        <pre>${esc(c.aql)}</pre>
+      </details>
+    </div>`;
+
+    const q = a => el.querySelector('[data-act="'+a+'"]');
+    q('node').addEventListener('click', ()=> window.open(c.node_url, '_blank'));
+    q('graph').addEventListener('click', async ev => {
+      const b = ev.currentTarget, label = b.textContent;
+      // open the tab inside the click itself, or the popup blocker eats it once
+      // the await returns, then point it at the graph after the start node is set
+      const w = window.open('', '_blank');
+      b.textContent = 'Focusing…';
+      try{
+        const r = await fetch('/api/change/focus', {method:'POST',
+          headers:{'Content-Type':'application/json'},
+          body: JSON.stringify({anchor: c.anchor})});
+        if(!r.ok) throw new Error((await r.json()).detail||'failed');
+        if(w) w.location = c.graph_url; else window.open(c.graph_url, '_blank');
+      }catch(e){
+        if(w) w.close();
+        alert('Could not set the start node: ' + e.message);
+      }finally{ b.textContent = label; }
+    });
+    q('copy').addEventListener('click', ev => copyAql(ev.currentTarget, c.aql));
+    if(revKey) q('revert').addEventListener('click',
+      ev => revertChange(revKey, ev.currentTarget));
+  }catch(e){ el.innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+}
+
+function copyAql(btn, text){
+  const done = ()=>{ const t = btn.textContent; btn.textContent = 'Copied';
+                     setTimeout(()=>btn.textContent = t, 1600); };
+  if(navigator.clipboard && window.isSecureContext){
+    navigator.clipboard.writeText(text).then(done, ()=>fallback());
+  } else { fallback(); }
+  function fallback(){
+    // http://127.0.0.1 is not a secure context in every browser, so keep a path
+    // that does not depend on the clipboard API being available
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{ document.execCommand('copy'); done(); }
+    catch(e){ btn.textContent = 'Press Cmd+C'; }
+    document.body.removeChild(ta);
+  }
+}
+
+async function accept(i){
+  const p = window._props[i];
+  document.getElementById('btns-'+i).innerHTML = '<span class="note">Applying…</span>';
+  try{
+    const r = await fetch('/api/proposal/accept', {method:'POST',
+      headers:{'Content-Type':'application/json'}, body: JSON.stringify({proposal:p})});
+    const body = await r.json();
+    if(!r.ok) throw new Error(body.detail||'failed');
+    document.getElementById('prop-card-'+i).classList.add('accepted');
+    document.getElementById('status-'+i).innerHTML =
+      `<div class="note">Saved to the graph, tagged <code>evidence_accepted</code>.</div>
+       <div id="landed-${i}"></div>`;
+    document.getElementById('btns-'+i).innerHTML =
+      `<button class="btn-sm undo" onclick="undo(${i})">Undo</button>`;
+    showLanded('landed-'+i, {proposal: p});
+  }catch(e){
+    document.getElementById('btns-'+i).innerHTML =
+      `<button class="btn-sm accept" onclick="accept(${i})">Retry</button>`;
+    document.getElementById('status-'+i).innerHTML =
+      `<div class="err">${esc(e.message)}</div>`;
+  }
+}
+
+function deny(i){
+  document.getElementById('prop-card-'+i).classList.add('denied');
+  document.getElementById('btns-'+i).innerHTML = '<span class="note">Rejected. Model unchanged.</span>';
+}
+
+async function undo(i){
+  const p = window._props[i];
+  try{
+    const r = await fetch('/api/proposal/undo', {method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({proposal_id: p.id})});
+    if(!r.ok) throw new Error((await r.json()).detail||'failed');
+    document.getElementById('prop-card-'+i).classList.remove('accepted');
+    document.getElementById('status-'+i).innerHTML = '<div class="note">Reverted.</div>';
+    document.getElementById('btns-'+i).innerHTML =
+      `<button class="btn-sm accept" onclick="accept(${i})">Accept</button>
+       <button class="btn-sm deny" onclick="deny(${i})">Reject</button>`;
+  }catch(e){
+    document.getElementById('status-'+i).innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  }
+}
+
+// ------------------------------------------------------- deployment switch
+let PROF = {active:'', profiles:[]}, PROF_PICK = '';
+const stat = (r) => r ? `<span class="dot ${r.ok?'ok':'bad'}"></span><span class="d">${esc(r.detail||'')}</span>`
+                      : `<span class="d">checking…</span>`;
+
+function renderProfiles(tests){
+  const el = document.getElementById('pcards');
+  el.innerHTML = PROF.profiles.map(p=>{
+    const t = (tests||{})[p.key] || {};
+    const isCur = p.key === PROF.active;
+    return `<button class="pcard${isCur?' on':''}${p.key===PROF_PICK?' pick':''}" data-key="${esc(p.key)}">
+      <div class="ph"><b>${esc(p.label)}</b>${isCur?'<span class="cur">current</span>':''}</div>
+      <div class="host">${esc(p.host||'no credentials in environment')}</div>
+      <div class="tline"><b>Model</b>${stat(t.structured)}</div>
+      <div class="tline"><b>Corpus</b>${stat(t.corpus)}</div>
+      <div class="tline"><b>Retriever</b>${stat(t.retriever)}</div>
+      <div class="tline"><b>AQLizer</b>${stat(t.aqlizer)}</div>
+    </button>`; }).join('');
+  el.querySelectorAll('.pcard').forEach(b=>b.addEventListener('click', ()=>{
+    PROF_PICK = b.dataset.key; renderProfiles(PROF._tests);
+    const go = document.getElementById('profileGo');
+    const p = PROF.profiles.find(x=>x.key===PROF_PICK) || {};
+    go.disabled = PROF_PICK === PROF.active || !p.credentials;
+    go.textContent = PROF_PICK === PROF.active ? 'Already active' : 'Switch to ' + (p.label||PROF_PICK);
+  }));
+}
+
+async function openProfile(){
+  document.getElementById('profileModal').classList.add('on');
+  document.getElementById('profileMsg').innerHTML = '';
+  document.getElementById('profileGo').disabled = true;
+  document.getElementById('profileGo').textContent = 'Switch';
+  document.getElementById('profileHint').textContent = 'Pick a deployment. Status checks are live.';
+  try{
+    PROF = await (await fetch('/api/profile')).json();
+    PROF_PICK = ''; PROF._tests = null;     // amber only after a click
+    renderProfiles(null);
+    PROF._tests = await (await fetch('/api/profile/test')).json();
+    renderProfiles(PROF._tests);
+  }catch(e){
+    document.getElementById('profileMsg').innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  }
+}
+function closeProfile(){ document.getElementById('profileModal').classList.remove('on'); }
+
+async function switchProfile(){
+  const go = document.getElementById('profileGo');
+  go.disabled = true; go.textContent = 'Switching…';
+  try{
+    const r = await fetch('/api/profile', {method:'PUT',
+      headers:{'Content-Type':'application/json'}, body: JSON.stringify({key: PROF_PICK})});
+    const d = await r.json();
+    if(!r.ok) throw new Error(d.detail||'failed');
+    closeProfile();
+    if(d.notes && d.notes.length) alert(d.notes.join('\n'));
+    await reloadEverything();
+  }catch(e){
+    document.getElementById('profileMsg').innerHTML = `<div class="err">${esc(e.message)}</div>`;
+    go.disabled = false; go.textContent = 'Retry';
+  }
+}
+
+// every cached view belongs to the old deployment, so drop all of it and re-boot
+async function reloadEverything(){
+  OVERVIEW_LOADED = false; CORPUS_LOADED = false; UPD_INIT = false; PENDING_N = 0;
+  document.getElementById('out').innerHTML = '';
+  document.getElementById('askHint').style.display = '';
+  ['ovStats','corpStats','modelTables','corpTable','reportList','acceptedList',
+   'pendingList','runlog','platBacklog','platformSummary'].forEach(id=>{
+     const el = document.getElementById(id); if(el) el.innerHTML = ''; });
+  document.getElementById('pendBadge').classList.remove('on');
+  await boot();
+  const page = ['ask','overview','updates','arch'].find(t=>
+    document.getElementById('page-'+t).classList.contains('on')) || 'ask';
+  showTab(page);
+}
+
+// ---------------------------------------------------------------- tabs
+let OVERVIEW_LOADED = false;
+function showTab(which){
+  ['ask','overview','updates','arch'].forEach(t=>{
+    document.getElementById('page-'+t).classList.toggle('on', t===which);
+    document.getElementById('tab-'+t).classList.toggle('on', t===which);
+  });
+  if(which==='overview' && !OVERVIEW_LOADED){ OVERVIEW_LOADED = true; loadOverview(); }
+  if(which==='arch'){ drawArch(); drawArch2(); }
+  if(which==='updates'){ initUpdates(); }
+}
+
+// ------------------------------------------------- platform summary table
+function keyOf(name){ const p = PLATFORMS.find(x=>x.name===name); return p ? p.key : null; }
+function yr(v){ return (v===null||v===undefined||v==='') ? '—' : String(v); }
+function num(v, unit){
+  if(v===null||v===undefined||v==='') return '—';
+  const n = typeof v === 'number' ? v.toLocaleString() : v;
+  return unit ? n+' '+unit : n;
+}
+function kv(k,v){ return `<div class="kv"><span class="k">${esc(k)}</span><span class="v">${esc(v)}</span></div>`; }
+
+async function loadSummary(){
+  const name = document.getElementById('platform').value;
+  const k = keyOf(name);
+  const el = document.getElementById('platformSummary');
+  if(!k){ el.innerHTML=''; return; }
+  el.innerHTML = '<div class="note" style="padding:6px 2px">Loading platform profile…</div>';
+  try{
+    const d = await (await fetch('/api/platform/'+k+'/summary')).json();
+    const id=d.identity, pf=d.performance, sg=d.signature, af=d.airframe,
+          pr=d.propulsion, sn=d.sensors, ew=d.ew, ar=d.armament,
+          op=d.operators, pg=d.program;
+    const chip = x => `<span class="chip${x.provenance==='evidence_accepted'?' ev':''}">${esc(x.name)}</span>`;
+    el.innerHTML = `
+    <div class="sum-card">
+      <div class="sum-head">
+        <h2>${esc(id.name)}</h2>
+        <span class="sub">${esc(id.manufacturer)} · ${esc(id.origin)} · Gen ${esc(id.generation)}
+          · ${esc(id.role)} · ${esc(id.status)} since ${esc(id.in_service)}</span>
+      </div>
+      <div class="sum-grid">
+        <div class="sum-col"><h4>Performance</h4>
+          ${kv('Max speed', num(pf.max_speed_kmh,'km/h'))}
+          ${kv('Cruise', num(pf.cruise_speed_kmh,'km/h'))}
+          ${kv('Supercruise', pf.supercruise ? 'Yes' : 'No')}
+          ${kv('Ceiling', num(pf.ceiling_m,'m'))}
+          ${kv('Combat radius', num(pf.combat_radius_km,'km'))}
+          ${kv('Ferry range', num(pf.ferry_range_km,'km'))}
+        </div>
+        <div class="sum-col"><h4>Signature &amp; airframe</h4>
+          ${kv('RCS', num(sg.rcs_m2,'m²'))}
+          ${kv('MTOW', num(af.mtow_kg,'kg'))}
+          ${kv('Empty weight', num(af.empty_weight_kg,'kg'))}
+          ${kv('Hardpoints', num(af.hardpoints))}
+          ${kv('Weapon load', num(af.max_weapon_load_kg,'kg'))}
+          ${kv('Internal bay', af.internal_bay ? 'Yes' : 'No')}
+        </div>
+        <div class="sum-col"><h4>Propulsion &amp; sensors</h4>
+          ${kv('Engine', num(pr.engine))}
+          ${kv('Count / thrust', num(pr.count)+' × '+num(pr.thrust_kn,'kN'))}
+          ${kv('Thrust vectoring', pr.thrust_vectoring ? 'Yes' : 'No')}
+          ${kv('Radar', num(sn.radar))}
+          ${kv('Radar type', num(sn.radar_type))}
+          ${kv('Radar score', num(sn.radar_score))}
+        </div>
+        <div class="sum-col"><h4>Electronic warfare · score ${num(ew.score)}</h4>
+          ${ew.systems.length ? ew.systems.map(chip).join('') : '<span class="note">none recorded</span>'}
+          <h4 style="margin-top:12px">Armament · score ${num(ar.missile_score)}</h4>
+          ${ar.weapons.length ? ar.weapons.map(chip).join('') : '<span class="note">none recorded</span>'}
+        </div>
+        <div class="sum-col"><h4>Operators (${num(op.count)})</h4>
+          ${op.top.slice(0,6).map(c=>kv(c.name, num(c.qty)+(c.since?' · '+c.since:''))).join('')}
+        </div>
+        <div class="sum-col"><h4>Programme</h4>
+          ${kv('Units produced', num(pg.units_produced))}
+          ${kv('Unit cost', pg.unit_cost_m_usd!=null ? '$'+num(pg.unit_cost_m_usd)+'M' : '—')}
+          ${kv('Cost / flight hr', pg.cost_per_flight_hour_usd!=null ? '$'+num(pg.cost_per_flight_hour_usd) : '—')}
+          ${kv('First flight', yr(id.first_flight))}
+        </div>
+      </div>
+    </div>`;
+  }catch(e){ el.innerHTML = `<div class="err">Could not load profile: ${esc(e.message)}</div>`; }
+}
+
+// ------------------------------------------------------------- overview
+const DOC_STATES = [
+  ['not_reviewed',     'not reviewed',        '#E0B283'],
+  ['awaiting_review',  'waiting on you',      '#C97C1C'],
+  ['accepted',         'accepted',            '#2F7D5F'],
+  ['rejected',         'rejected',            '#8A9AA3'],
+  ['no_change',        'model already correct','#2E4451']
+];
+const STATE_COLOR = Object.fromEntries(DOC_STATES.map(x=>[x[0],x[2]]));
+let CORPUS_LOADED = false;
+
+function showOv(which){
+  document.getElementById('ovView-model').style.display  = which==='model'  ? '' : 'none';
+  document.getElementById('ovView-corpus').style.display = which==='corpus' ? '' : 'none';
+  document.getElementById('ov-model').classList.toggle('on', which==='model');
+  document.getElementById('ov-corpus').classList.toggle('on', which==='corpus');
+  if(which==='corpus' && !CORPUS_LOADED){ CORPUS_LOADED = true; loadCorpus(); }
+}
+
+async function loadOverview(){
+  const stats = document.getElementById('ovStats');
+  stats.innerHTML = '<div class="note">Loading…</div>';
+  try{
+    const d = await (await fetch('/api/overview')).json();
+    const m = d.model, vc = m.vertex_counts, ec = m.edge_counts;
+    const shared = ['Weapon','DefensiveSystem','Engine','RadarSystem','Country']
+      .reduce((a,k)=>a+(vc[k]||0),0);
+    stats.innerHTML = `
+      <div class="stat slate"><div class="n">${vc.Platform||0}</div>
+        <div class="l">platforms</div></div>
+      <div class="stat slate"><div class="n">${m.total_vertices}</div>
+        <div class="l">nodes in the model</div></div>
+      <div class="stat slate"><div class="n">${m.total_edges}</div>
+        <div class="l">relationships</div></div>
+      <div class="stat"><div class="n">${shared}</div>
+        <div class="l">shared entities</div></div>
+      <div class="stat"><div class="n">${m.promoted_from_evidence}</div>
+        <div class="l">values from source documents</div></div>`;
+    drawGraph(m);
+
+    const catRows = ['Performance','Signature','Airframe','Propulsion','Sensors',
+                     'ElectronicWarfare','Armament','Operators','Program'];
+    const entRows = ['Weapon','DefensiveSystem','Engine','RadarSystem','Country'];
+    const row = k => `<tr><td>${esc(k.replace(/([a-z])([A-Z])/g,'$1 $2'))}</td>
+                      <td class="n">${vc[k]||0}</td></tr>`;
+    const erow = k => `<tr><td>${esc(k)}</td><td class="n">${vc[k]||0}</td></tr>`;
+    document.getElementById('modelTables').innerHTML = `
+      <h3>How the model is put together</h3>
+      <div class="note">Each platform carries nine category nodes. Those hang off shared
+        entity nodes, so one weapon or one operator country is a single node the whole
+        fleet points at.</div>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin-top:12px">
+        <div><table class="mini"><tr><th>Category node</th><th class="n">Count</th></tr>
+          ${catRows.map(row).join('')}</table></div>
+        <div><table class="mini"><tr><th>Shared entity</th><th class="n">Count</th></tr>
+          ${entRows.map(erow).join('')}</table></div>
+        <div><table class="mini"><tr><th>Relationship</th><th class="n">Count</th></tr>
+          ${Object.entries(ec).sort((a,b)=>b[1]-a[1]).slice(0,9).map(([k,v])=>
+            `<tr><td><code style="font-size:11.5px">${esc(k)}</code></td>
+             <td class="n">${v}</td></tr>`).join('')}</table></div>
+      </div>`;
+  }catch(e){ stats.innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+}
+
+function drawGraph(m){
+  const svg = document.getElementById('graph');
+  const W = svg.clientWidth || 1100, H = 520;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const cx = W/2, cy = H/2;
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (t,a)=>{ const e=document.createElementNS(NS,t);
+    for(const k in a) e.setAttribute(k,a[k]); return e; };
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+  const vc = m.vertex_counts;
+  // leaf-bearing categories alternate with plain ones so no two fans sit side by side
+  const cats = [['Performance','Performance',0],
+                ['Propulsion','Propulsion',vc.Engine],
+                ['Signature','Signature',0],
+                ['Sensors','Sensors',vc.RadarSystem],
+                ['Airframe','Airframe',0],
+                ['ElectronicWarfare','Electronic warfare',vc.DefensiveSystem],
+                ['Program','Program',0],
+                ['Armament','Armament',vc.Weapon],
+                ['Operators','Operators',vc.Country]];
+  const R = 122, LR = 206;
+  const slice = Math.PI*2/cats.length;
+  const edges = el('g',{}), nodes = el('g',{}), labels = el('g',{});
+
+  cats.forEach((cat,i)=>{
+    const a = i*slice - Math.PI/2;
+    const x = cx + Math.cos(a)*R, y = cy + Math.sin(a)*R;
+    edges.appendChild(el('line',{x1:cx,y1:cy,x2:x,y2:y,stroke:'#AFBEC7','stroke-width':1.5}));
+
+    const k = Math.min(cat[2]||0, 7);
+    if(k){
+      // keep every leaf fan inside its own slice so the arms stay legible
+      const step = k>1 ? Math.min(0.15, (slice*0.72)/(k-1)) : 0;
+      for(let j=0;j<k;j++){
+        const sa = a + (j-(k-1)/2)*step;
+        const lx = cx + Math.cos(sa)*LR, ly = cy + Math.sin(sa)*LR;
+        edges.appendChild(el('line',{x1:x,y1:y,x2:lx,y2:ly,stroke:'#CFD9DF','stroke-width':1}));
+        nodes.appendChild(el('circle',{cx:lx,cy:ly,r:5.5,fill:'#4A7C8C'}));
+      }
+    }
+    nodes.appendChild(el('circle',{cx:x,cy:y,r:16,fill:'#2E4451'}));
+
+    // push the caption outward along the spoke so it never lands on an arm
+    const off = k ? LR+30 : R+30;
+    const tx = cx + Math.cos(a)*off, ty = cy + Math.sin(a)*off;
+    const t = el('text',{x:tx,y:ty+4,'text-anchor':
+        Math.abs(Math.cos(a))<0.25 ? 'middle' : (Math.cos(a)>0?'start':'end'),
+      'font-size':'11.5',fill:'#3A4A54','font-family':'system-ui','font-weight':'600'});
+    t.textContent = cat[1] + (cat[2] ? '  ·  '+cat[2] : '');
+    labels.appendChild(t);
+  });
+
+  svg.appendChild(edges); svg.appendChild(nodes); svg.appendChild(labels);
+  const core = el('g',{});
+  core.appendChild(el('circle',{cx:cx,cy:cy,r:32,fill:'#1C2A33'}));
+  const ct = el('text',{x:cx,y:cy+4,'text-anchor':'middle','font-size':'11.5',
+    fill:'#fff','font-weight':'700','font-family':'system-ui'});
+  ct.textContent = 'Platform'; core.appendChild(ct);
+  svg.appendChild(core);
+}
+
+// ------------------------------------------------------------- source corpus
+async function loadCorpus(){
+  const stats = document.getElementById('corpStats');
+  stats.innerHTML = '<div class="note">Loading…</div>';
+  try{
+    const d = await (await fetch('/api/corpus/documents')).json();
+    const docs = d.documents || [];
+    const by = {}; DOC_STATES.forEach(([k])=>by[k]=0);
+    const fmt = {};
+    docs.forEach(x=>{ by[x.state] = (by[x.state]||0)+1;
+                      fmt[x.format] = (fmt[x.format]||0)+1; });
+    const reviewed = docs.length - (by.not_reviewed||0);
+    stats.innerHTML = `
+      <div class="stat slate"><div class="n">${docs.length}</div>
+        <div class="l">source documents</div></div>
+      <div class="stat slate"><div class="n">${fmt.pdf||0}</div>
+        <div class="l">PDF</div></div>
+      <div class="stat slate"><div class="n">${fmt.txt||0}</div>
+        <div class="l">plain text</div></div>
+      <div class="stat"><div class="n">${reviewed}</div>
+        <div class="l">reviewed against the model</div></div>
+      <div class="stat amber"><div class="n">${by.not_reviewed||0}</div>
+        <div class="l">not reviewed</div></div>`;
+
+    document.getElementById('cloudLegend').innerHTML = DOC_STATES
+      .filter(([k])=>by[k]>0)
+      .map(([k,l,c])=>`<span><i style="background:${c}"></i>${esc(l)} · ${by[k]}</span>`).join('');
+
+    drawCloud(docs);
+
+    const groups = {};
+    docs.forEach(x=>{ const p = x.platform || 'No single platform';
+                      (groups[p] = groups[p] || []).push(x); });
+    const orphan = docs.filter(x=>!x.platform).length;
+    const rows = Object.entries(groups).sort((a,b)=>b[1].length-a[1].length).map(([p,list])=>{
+      const rev = list.filter(x=>x.state!=='not_reviewed').length;
+      const pct = Math.round(100*rev/list.length);
+      return `<tr><td>${esc(p)}</td><td class="n">${list.length}</td>
+        <td class="n">${rev}</td><td class="n">${list.length-rev}</td>
+        <td style="width:130px"><div class="bar2"><i style="width:${pct}%"></i></div></td></tr>`;
+    }).join('');
+    document.getElementById('corpTable').innerHTML = `
+      <h3>The corpus by platform</h3>
+      <div class="note">A document belongs to a platform when it names that platform in its
+        text. ${orphan} name none, so no platform-level question reaches them.</div>
+      <table class="mini" style="margin-top:10px">
+        <tr><th>Platform</th><th class="n">Documents</th><th class="n">Reviewed</th>
+            <th class="n">Not reviewed</th><th>Progress</th></tr>${rows}</table>`;
+  }catch(e){ stats.innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+}
+
+function drawCloud(docs){
+  const svg = document.getElementById('cloud');
+  const W = svg.clientWidth || 1100, H = 410;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (t,a,txt)=>{ const e=document.createElementNS(NS,t);
+    for(const k in a) e.setAttribute(k,a[k]); if(txt!=null) e.textContent=txt; return e; };
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+  const groups = {};
+  docs.forEach(x=>{ const p = x.platform || 'No single platform';
+                    (groups[p] = groups[p] || []).push(x); });
+  const list = Object.entries(groups).sort((a,b)=>b[1].length-a[1].length);
+
+  const cols = W < 760 ? 3 : 5;
+  const rows = Math.ceil(list.length/cols);
+  const cw = W/cols, ch = (H-16)/rows;
+
+  list.forEach(([name, items], i)=>{
+    const gx = (i%cols)*cw + cw/2, gy = Math.floor(i/cols)*ch + ch/2 - 6;
+    const g = el('g',{});
+    // phyllotaxis keeps the disc evenly packed whatever the count
+    const step = Math.min(9.5, Math.max(6.4, 46/Math.sqrt(items.length)));
+    items.forEach((doc,j)=>{
+      const a = j*2.39996, r = step*Math.sqrt(j+0.5);
+      const c = el('circle',{cx:gx+Math.cos(a)*r, cy:gy+Math.sin(a)*r, r:3.6,
+        fill:STATE_COLOR[doc.state]||'#8A9AA3', opacity:'.92'});
+      c.appendChild(el('title',{},doc.filename+'  ·  '+doc.state.replace(/_/g,' ')));
+      g.appendChild(c);
+    });
+    const half = step*Math.sqrt(items.length);
+    g.appendChild(el('text',{x:gx, y:gy+half+22,'text-anchor':'middle','font-size':'11.5',
+      fill:'#3A4A54','font-family':'system-ui','font-weight':'600'}, name));
+    g.appendChild(el('text',{x:gx, y:gy+half+36,'text-anchor':'middle','font-size':'11',
+      fill:'#64767F','font-family':'system-ui'}, items.length+' documents'));
+    svg.appendChild(g);
+  });
+}
+
+// -------------------------------------------------------- architecture map
+function drawArch(){
+  const svg = document.getElementById('arch');
+  const W = svg.clientWidth || 1100, H = 360;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const NS='http://www.w3.org/2000/svg';
+  const el=(t,a,txt)=>{const e=document.createElementNS(NS,t);
+    for(const k in a) e.setAttribute(k,a[k]); if(txt!=null) e.textContent=txt; return e;};
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+  const defs = el('defs',{});
+  [['ah','#8A9AA3'],['ah2','#2F7D5F']].forEach(([id,col])=>{
+    const m = el('marker',{id, viewBox:'0 0 10 10', refX:'9', refY:'5',
+      markerWidth:'6', markerHeight:'6', orient:'auto-start-reverse'});
+    m.appendChild(el('path',{d:'M 0 0 L 10 5 L 0 10 z', fill:col}));
+    defs.appendChild(m);
+  });
+  svg.appendChild(defs);
+
+  const F='system-ui,-apple-system,sans-serif';
+  function box(x,y,w,h,fill,stroke,title,sub,tcol){
+    const g=el('g',{});
+    g.appendChild(el('rect',{x,y,width:w,height:h,rx:9,fill,stroke:stroke||'none','stroke-width':1.4}));
+    g.appendChild(el('text',{x:x+w/2,y:y+(sub?h/2-4:h/2+4),'text-anchor':'middle',
+      'font-size':'13','font-weight':'700','font-family':F,fill:tcol||'#fff'},title));
+    if(sub) g.appendChild(el('text',{x:x+w/2,y:y+h/2+14,'text-anchor':'middle',
+      'font-size':'11','font-family':F,fill:tcol||'#fff','opacity':'.75'},sub));
+    svg.appendChild(g); return g;
+  }
+  function arrow(x1,y1,x2,y2,col,dash,marker){
+    svg.appendChild(el('path',{d:`M ${x1} ${y1} L ${x2} ${y2}`,stroke:col||'#8A9AA3',
+      'stroke-width':1.7,fill:'none','marker-end':`url(#${marker||'ah'})`,
+      ...(dash?{'stroke-dasharray':dash}:{})}));
+  }
+  function curve(x1,y1,x2,y2,cx,cy,col,dash,marker){
+    svg.appendChild(el('path',{d:`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,stroke:col||'#8A9AA3',
+      'stroke-width':1.7,fill:'none','marker-end':`url(#${marker||'ah'})`,
+      ...(dash?{'stroke-dasharray':dash}:{})}));
+  }
+  function label(x,y,t,col,anchor){
+    svg.appendChild(el('text',{x,y,'text-anchor':anchor||'middle','font-size':'11',
+      'font-family':F,fill:col||'#64767F'},t));
+  }
+
+  const BW=164, BH=54;
+  const xQ=26, xA=236, xSrc=492, xR=712, xOut=908;
+  const yTop=92, yBot=206, yMid=149;
+
+  // question
+  box(xQ,yMid-27,150,BH,'#1C2A33',null,'Analyst question','+ selected platform');
+
+  // agents
+  box(xA,yTop-27,BW,BH,'#2E4451',null,'Agent 1','natural language → AQL');
+  box(xA,yBot-27,BW,BH,'#C97C1C',null,'Agent 2','same question, verbatim');
+
+  // data stores
+  box(xSrc,yTop-27,BW,BH,'#EDF2F5','#C3CFD6','Structured model','aircraft_model graph','#2E4451');
+  box(xSrc,yBot-27,BW,BH,'#FCF3E4','#E4C99B','Document corpus','181 sources, GraphRAG','#8A5F14');
+
+  // reconciler + output
+  box(xR,yMid-34,BW,68,'#2F7D5F',null,'Agent 3','reconcile + propose');
+  box(xOut,yMid-46,152,92,'#FFFFFF','#C3CFD6','','','#1C2A33');
+  label(xOut+76,yMid-24,'Official / corroborated','#2E4451');
+  label(xOut+76,yMid-8,'/ not yet in model','#2E4451');
+  label(xOut+76,yMid+14,'+ proposed edits','#2F7D5F');
+  label(xOut+76,yMid+32,'you accept or deny','#64767F');
+
+  // question fans out to both agents
+  curve(xQ+150,yMid-8,xA,yTop,(xQ+xA)/2+20,yTop+10);
+  curve(xQ+150,yMid+8,xA,yBot,(xQ+xA)/2+20,yBot-10,'#C97C1C');
+
+  // agents query their own store, and get results back
+  arrow(xA+BW,yTop-8,xSrc,yTop-8);
+  arrow(xSrc,yTop+12,xA+BW,yTop+12);
+  label((xA+BW+xSrc)/2,yTop-16,'read-only AQL');
+  arrow(xA+BW,yBot-8,xSrc,yBot-8,'#C97C1C');
+  arrow(xSrc,yBot+12,xA+BW,yBot+12,'#C97C1C');
+  label((xA+BW+xSrc)/2,yBot-16,'graphrag-query','#8A5F14');
+
+  // both converge on agent 3
+  curve(xSrc+BW,yTop+6,xR,yMid-16,(xSrc+BW+xR)/2+10,yTop+30);
+  curve(xSrc+BW,yBot-6,xR,yMid+16,(xSrc+BW+xR)/2+10,yBot-30,'#C97C1C');
+
+  // agent 3 -> output
+  arrow(xR+BW,yMid,xOut,yMid,'#2F7D5F',null,'ah2');
+
+  // accepted edits write back into the structured model
+  curve(xOut+76,yMid+46,xSrc+BW/2,yTop+29,(xOut+xSrc)/2,yMid+126,'#2F7D5F','5,4','ah2');
+  label((xOut+xSrc)/2+50,yMid+120,'accepted edits go back to the model, tagged with their source','#2F7D5F');
+
+  // footnote
+  label(W-20,H-14,'Agent 1 and agent 2 read different stores. Neither sees the other’s data.',
+        '#8A9AA3','end');
+}
+
+// ------------------------------------------- change-detection flow diagram
+function drawArch2(){
+  const svg = document.getElementById('arch2');
+  const W = svg.clientWidth || 1100, H = 336;
+  svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+  const NS='http://www.w3.org/2000/svg';
+  const el=(t,a,txt)=>{const e=document.createElementNS(NS,t);
+    for(const k in a) e.setAttribute(k,a[k]); if(txt!=null) e.textContent=txt; return e;};
+  while(svg.firstChild) svg.removeChild(svg.firstChild);
+
+  const defs = el('defs',{});
+  [['bh','#8A9AA3'],['bh2','#2F7D5F'],['bh3','#C97C1C']].forEach(([id,col])=>{
+    const m = el('marker',{id, viewBox:'0 0 10 10', refX:'9', refY:'5',
+      markerWidth:'6', markerHeight:'6', orient:'auto-start-reverse'});
+    m.appendChild(el('path',{d:'M 0 0 L 10 5 L 0 10 z', fill:col}));
+    defs.appendChild(m);
+  });
+  svg.appendChild(defs);
+
+  const F='system-ui,-apple-system,sans-serif';
+  const box=(x,y,w,h,fill,stroke,title,sub,tcol)=>{
+    const g=el('g',{});
+    g.appendChild(el('rect',{x,y,width:w,height:h,rx:9,fill,stroke:stroke||'none','stroke-width':1.4}));
+    g.appendChild(el('text',{x:x+w/2,y:y+(sub?h/2-4:h/2+4),'text-anchor':'middle',
+      'font-size':'13','font-weight':'700','font-family':F,fill:tcol||'#fff'},title));
+    if(sub) g.appendChild(el('text',{x:x+w/2,y:y+h/2+14,'text-anchor':'middle',
+      'font-size':'11','font-family':F,fill:tcol||'#fff','opacity':'.78'},sub));
+    svg.appendChild(g);
+  };
+  const arrow=(x1,y1,x2,y2,col,dash,marker)=>{
+    svg.appendChild(el('path',{d:`M ${x1} ${y1} L ${x2} ${y2}`,stroke:col||'#8A9AA3',
+      'stroke-width':1.7,fill:'none','marker-end':`url(#${marker||'bh'})`,
+      ...(dash?{'stroke-dasharray':dash}:{})}));
+  };
+  const curve=(x1,y1,x2,y2,cx,cy,col,dash,marker)=>{
+    svg.appendChild(el('path',{d:`M ${x1} ${y1} Q ${cx} ${cy} ${x2} ${y2}`,stroke:col||'#8A9AA3',
+      'stroke-width':1.7,fill:'none','marker-end':`url(#${marker||'bh'})`,
+      ...(dash?{'stroke-dasharray':dash}:{})}));
+  };
+  const label=(x,y,t,col,anchor)=>{
+    svg.appendChild(el('text',{x,y,'text-anchor':anchor||'middle','font-size':'11',
+      'font-family':F,fill:col||'#64767F'},t));
+  };
+
+  const BW=150, BH=52, y=96;
+  const gap = Math.max(28, (W - 40 - 5*BW) / 4);
+  const x = i => 20 + i*(BW+gap);
+
+  box(x(0),y,BW,BH,'#FCF3E4','#E4C99B','Source corpus','every document','#8A5F14');
+  box(x(1),y,BW,BH,'#2E4451',null,'Detect','not reviewed yet');
+  box(x(2),y,BW,BH,'#2E4451',null,'Compare','document vs model');
+  box(x(3),y,BW,BH,'#C97C1C',null,'Queue','waiting on you');
+  box(x(4),y,BW,BH,'#2F7D5F',null,'You decide','accept or reject');
+
+  for(let i=0;i<4;i++){
+    const col = i===2 ? '#C97C1C' : (i===3 ? '#2F7D5F' : '#8A9AA3');
+    const mk  = i===2 ? 'bh3'     : (i===3 ? 'bh2'     : 'bh');
+    arrow(x(i)+BW, y+BH/2, x(i+1), y+BH/2, col, null, mk);
+  }
+  label(x(1)+BW+gap/2, y-10, 'reads text', '#64767F');
+  label(x(2)+BW+gap/2, y-10, 'proposes edits', '#8A5F14');
+
+  // nothing new: detect ends the run rather than calling the model
+  const yStop = y - 46;
+  box(x(1)+BW/2-64, yStop-16, 128, 32, '#F0F3F5', '#C3CFD6', 'Stop', null, '#64767F');
+  arrow(x(1)+BW/2, y, x(1)+BW/2, yStop+16, '#8A9AA3', '5,4', 'bh');
+  label(x(1)+BW/2+76, yStop, 'backlog empty: no model call, no cost', '#8A9AA3', 'start');
+
+  // the model itself: compare reads it, an accepted change writes to it
+  const yM = y + BH + 62;
+  box(x(2)+BW/2-84, yM, 168, 44, '#EDF2F5', '#C3CFD6', 'Structured model',
+      'aircraft_model graph', '#2E4451');
+  arrow(x(2)+BW/2-40, yM, x(2)+BW/2-40, y+BH, '#8A9AA3');
+  label(x(2)+BW/2-48, yM-14, 'current state', '#64767F', 'end');
+  curve(x(4)+BW/2, y+BH, x(2)+BW/2+40, yM, (x(2)+x(4))/2+BW, yM+8, '#2F7D5F','5,4','bh2');
+  label(W-20, yM+42, 'accepted: written to the graph, tagged with its source',
+        '#2F7D5F', 'end');
+
+  // the five resting states
+  const yS = yM + 84;
+  label(20, yS, 'Every document ends in one of five states:', '#3A4A54', 'start');
+  const states = [['not reviewed','#C97C1C'],['waiting on you','#C97C1C'],
+                  ['accepted','#2F7D5F'],['rejected','#8A9AA3'],
+                  ['model already correct','#2E4451']];
+  let sx = 258;
+  states.forEach(([t,c])=>{
+    svg.appendChild(el('rect',{x:sx,y:yS-11,width:9,height:9,rx:2,fill:c}));
+    label(sx+14, yS, t, '#3A4A54', 'start');
+    sx += 16 + t.length*6.4 + 22;
+  });
+}
+
+
+// ------------------------------------------------------------- updates tab
+let UPD_INIT = false;
+function initUpdates(){
+  if(!UPD_INIT){
+    const sel = document.getElementById('updPlatform');
+    sel.innerHTML = '<option value="">All platforms</option>' +
+      PLATFORMS.map(p=>`<option value="${esc(p.name)}">${esc(p.name)}</option>`).join('');
+    const su = PLATFORMS.find(p=>p.name.indexOf('Su-35S')===0);
+    if(su) sel.value = su.name;
+    sel.onchange = loadBacklog;
+    UPD_INIT = true;
+  }
+  loadBacklog(); loadPending(); loadAuto(); loadReports(); loadAccepted();
+}
+
+// Accepted changes stay reachable after a reload, collapsed so the console does
+// not grow a second long list.
+async function loadAccepted(){
+  const el = document.getElementById('acceptedList');
+  try{
+    const rows = await (await fetch('/api/updates/accepted')).json();
+    if(!rows.length){ el.innerHTML = ''; return; }
+    el.innerHTML = `<details><summary>Accepted changes (${rows.length})</summary>
+      <div class="body">` + rows.map(p=>`
+        <div class="prop accepted" id="acc-${esc(p._key)}" style="margin-bottom:9px">
+          <h4>${esc(p.title||p.op)}</h4>
+          <div class="meta"><code>${esc(p.op)}</code>
+            ${p.collection?'· '+esc(p.collection):''}
+            ${p.platform?'· '+esc(p.platform):''}
+            · accepted by ${esc(p.accepted_by||'analyst')}
+            ${p.evidence?'· source: '+esc(p.evidence):''}</div>
+          ${targetLine(p.targets)}
+          <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">
+            <button class="btn-sm open"
+              onclick="showLanded('accland-${esc(p._key)}',{key:'${esc(p._key)}'})">Database link</button>
+            ${p.evidence ? `<button class="btn-sm copy"
+              onclick="showSource('accsrc-${esc(p._key)}','${esc(p.evidence)}',this)">Source</button>` : ''}
+            ${p.revertable
+              ? `<button class="btn-sm deny" onclick="revertChange('${esc(p._key)}',this)">Revert</button>`
+              : `<span class="note" style="margin:0">Accepted before undo tokens were stored, so this one cannot be rolled back here</span>`}
+          </div>
+          <div id="accsrc-${esc(p._key)}"></div>
+          <div id="accland-${esc(p._key)}"></div>
+        </div>`).join('') + `</div></details>`;
+  }catch(e){ el.innerHTML = ''; }
+}
+
+// -------------------------------------------- unattended change detection
+let AUTO = {};
+let PENDING_N = 0;
+
+function when(iso){
+  if(!iso) return '—';
+  const d = new Date(iso), now = new Date();
+  const mins = Math.round((d - now)/60000);
+  const stamp = d.toLocaleString(undefined,
+    {month:'short', day:'numeric', hour:'numeric', minute:'2-digit'});
+  if(mins > 0)  return stamp + ' (in ' + (mins>=60 ? Math.round(mins/60)+'h' : mins+'m') + ')';
+  const ago = -mins;
+  return stamp + ' (' + (ago>=60 ? Math.round(ago/60)+'h' : ago+'m') + ' ago)';
+}
+
+async function loadAuto(){
+  try{
+    AUTO = await (await fetch('/api/autorun')).json();
+    document.getElementById('autoSw').classList.toggle('on', !!AUTO.enabled);
+    document.getElementById('autoCard').classList.toggle('on', !!AUTO.enabled);
+    document.getElementById('autoEvery').value = String(AUTO.interval_hours || 24);
+    const aa = AUTO.auto_accept || {};
+    [['high','aaHigh'],['medium','aaMedium'],['low','aaLow']].forEach(([lv,id])=>{
+      const b = document.getElementById(id);
+      b.classList.toggle('on', !!aa[lv]);
+      b.classList.toggle('warn', !!aa[lv] && lv!=='high');
+    });
+
+    const on = ['high','medium','low'].filter(lv=>aa[lv]);
+    const w = document.getElementById('aaWarn');
+    if(aa.low){
+      w.innerHTML = `<div class="err" style="margin:10px 0 0">Low confidence means the
+        source hedged its own claim. The agent will write those to the graph unreviewed.</div>`;
+    } else if(on.length){
+      w.innerHTML = `<div class="warn" style="margin:10px 0 0">The agent writes
+        ${esc(on.join(' and '))} confidence changes with nobody checking them first.
+        Each one is stamped <code>accepted_by: auto_agent</code>.</div>`;
+    } else { w.innerHTML = ''; }
+
+    const n = document.getElementById('autoNote');
+    let txt = AUTO.enabled
+      ? `Sweeps every platform on its own. Next sweep ${when(AUTO.next_run)}.`
+      : 'Off. Change detection runs only when you press the button on the left.';
+    txt += ` A sweep opens only documents nobody has reviewed, and skips a platform
+             with nothing new before it costs a model call.`;
+    if(AUTO.last_run) txt += ` Last sweep ${when(AUTO.last_run)}.`;
+    if(AUTO.last_error) txt += ` Last sweep failed: ${esc(AUTO.last_error)}.`;
+    n.textContent = txt.replace(/\s+/g,' ');
+  }catch(e){}
+}
+
+function toggleAA(level){
+  const aa = Object.assign({}, AUTO.auto_accept || {});
+  aa[level] = !aa[level];
+  saveAuto(undefined, aa);
+}
+
+async function saveAuto(enabled, autoAccept){
+  const body = {interval_hours: parseInt(document.getElementById('autoEvery').value,10)};
+  if(enabled !== undefined) body.enabled = enabled;
+  if(autoAccept !== undefined) body.auto_accept = autoAccept;
+  try{
+    const r = await fetch('/api/autorun', {method:'POST',
+      headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+    AUTO = await r.json();
+  }catch(e){}
+  loadAuto();
+}
+function toggleAuto(){ saveAuto(!AUTO.enabled); }
+
+async function sweepNow(){
+  const btn = document.getElementById('sweepBtn');
+  btn.disabled = true; btn.textContent = 'Sweeping every platform…';
+  try{
+    await fetch('/api/autorun/run-now', {method:'POST'});
+  }catch(e){}
+  btn.disabled = false; btn.textContent = 'Run a sweep now';
+  loadAuto(); loadReports(); loadBacklog(); loadPending();
+}
+
+async function loadReports(){
+  const el = document.getElementById('reportList');
+  try{
+    const rows = await (await fetch('/api/reports')).json();
+    if(!rows.length){ el.innerHTML = ''; return; }
+    el.innerHTML = `<h2 style="font-size:16px;margin:4px 0 12px">Change suggestion reports</h2>` +
+      rows.map(r=>`<div class="rep" id="rep-${esc(r._key)}">
+        <h4>${esc(when(r.generated_at))}</h4>
+        <div class="meta">${r.trigger==='scheduled'?'scheduled sweep':'run by hand'}
+          · ${r.platforms_scanned} platform(s) with a backlog
+          · ${r.documents_read} document(s) read
+          · ${r.proposal_count} change(s) suggested${
+            r.auto_accepted_count ? ' · '+r.auto_accepted_count+' accepted by the agent' : ''}</div>
+        <a style="font-size:12.5px;color:var(--slate-hi);cursor:pointer;text-decoration:underline;
+           display:inline-block;margin-top:8px"
+           onclick="openReport('${esc(r._key)}')">Read the report</a>
+        <div id="repbody-${esc(r._key)}"></div></div>`).join('');
+  }catch(e){ el.innerHTML = ''; }
+}
+
+async function revertChange(key, el){
+  const was = el.textContent;
+  el.textContent = 'reverting…';
+  try{
+    const r = await fetch('/api/change/revert', {method:'POST',
+      headers:{'Content-Type':'application/json'}, body: JSON.stringify({key})});
+    if(!r.ok) throw new Error((await r.json()).detail||'failed');
+    el.outerHTML =
+      '<span style="font-size:12px;color:var(--muted)">Reverted, back in the queue</span>';
+    bumpBadge(1); loadBacklog(); loadAccepted();
+  }catch(e){ el.textContent = was; alert('Revert failed: ' + e.message); }
+}
+const revertAuto = revertChange;   // the report list still calls it by the old name
+
+async function openReport(key){
+  const el = document.getElementById('repbody-'+key);
+  if(el.innerHTML){ el.innerHTML = ''; return; }
+  el.innerHTML = '<div class="note">Loading…</div>';
+  try{
+    const d = await (await fetch('/api/reports/'+key)).json();
+    el.innerHTML = (d.findings||[]).map(f=>{
+      if(f.error) return `<div class="pf"><b>${esc(f.platform)}</b>
+        <div class="err">${esc(f.error)}</div></div>`;
+      const props = (f.proposals||[]).map(p=>
+        `<li>${esc(p.title||p.op)} <span class="conf c-${esc((p.confidence||'medium').toLowerCase())}">${
+          esc((p.confidence||'medium').toLowerCase())}</span>${
+          p.auto_accepted ? ` <span class="conf c-high">accepted by the agent</span>
+            <a style="font-size:12px;color:var(--red);cursor:pointer;text-decoration:underline"
+               onclick="revertAuto('${esc(p._key)}',this)">revert</a>` : ''}
+         <div style="color:var(--muted);font-size:12.5px">${esc(p.evidence||'')}</div></li>`).join('');
+      return `<div class="pf"><b>${esc(f.platform)}</b>
+        <div class="meta">read ${(f.documents||[]).length} document(s)${
+          f.backlog_before!=null ? ' of '+f.backlog_before+' unreviewed' : ''}</div>
+        ${props ? `<ul style="margin:6px 0 0;padding-left:20px;font-size:13px">${props}</ul>`
+                : '<div class="note" style="margin:4px 0 0">No change needed. The documents matched the model.</div>'}
+      </div>`;
+    }).join('') || '<div class="note">Nothing to report.</div>';
+  }catch(e){ el.innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+}
+
+async function loadBacklog(){
+  // the auto agent sweeps every platform, so its counts are fleet-wide
+  try{
+    const d = await (await fetch('/api/updates/backlog')).json();
+    const pct = d.total ? Math.round(100*d.reviewed/d.total) : 0;
+    document.getElementById('meterFill').style.width = pct+'%';
+    document.getElementById('meterTxt').textContent =
+      `${d.reviewed} of ${d.total} reviewed`;
+
+    // population 1: documents. Every one of the 180 sits in exactly one of these.
+    document.getElementById('revStats').innerHTML = `
+      <div class="stat amber"><div class="n">${d.not_reviewed}</div>
+        <div class="l">documents not reviewed</div></div>
+      <div class="stat"><div class="n">${d.awaiting_review}</div>
+        <div class="l">documents that proposed a change</div></div>
+      <div class="stat"><div class="n">${d.accepted}</div>
+        <div class="l">documents whose change was accepted</div></div>
+      <div class="stat"><div class="n">${d.rejected}</div>
+        <div class="l">documents whose change was rejected</div></div>
+      <div class="stat slate"><div class="n">${d.no_change}</div>
+        <div class="l">documents, model already correct</div></div>`;
+  }catch(e){}
+
+  // the manual pane speaks only for the platform it has selected
+  const sel = document.getElementById('updPlatform');
+  const pname = sel ? sel.value : '';
+  if(!pname) return;
+  try{
+    const d = await (await fetch(
+      '/api/updates/backlog?platform='+encodeURIComponent(pname))).json();
+    const pct = d.total ? Math.round(100*d.reviewed/d.total) : 0;
+    const pr = d.proposals || {pending:0};
+    document.getElementById('platBacklog').innerHTML = `
+      <div class="note" style="margin:0 0 5px">${d.reviewed} of ${d.total} documents
+        reviewed, ${d.not_reviewed} left. ${pr.pending} change(s) waiting on you.</div>
+      <div class="meter"><i style="width:${pct}%"></i></div>`;
+  }catch(e){}
+}
+
+async function checkUpdates(){
+  const btn = document.getElementById('checkBtn');
+  const p = document.getElementById('updPlatform').value;
+  btn.disabled = true; btn.textContent = 'Detecting changes…';
+  document.getElementById('runlog').innerHTML =
+    '<div class="runlog">finding source documents nobody has reviewed…</div>';
+  try{
+    const r = await fetch('/api/updates/check', {method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({platform: p || null, limit: 6})});
+    const d = await r.json();
+    document.getElementById('runlog').innerHTML =
+      `<div class="runlog">${esc((d.log||[]).join('\n'))}${
+        d.checked && d.checked.length ? '\n\ndocuments read:\n  '+esc(d.checked.join('\n  ')) : ''}</div>`;
+    loadBacklog(); loadPending();
+  }catch(e){
+    document.getElementById('runlog').innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  }finally{ btn.disabled = false; btn.textContent = 'Run change detection'; }
+}
+
+async function loadPending(){
+  const el = document.getElementById('pendingList');
+  try{
+    const d = await (await fetch('/api/updates/pending')).json();
+    PENDING_N = d.length;
+    document.getElementById('pendBadge').classList.toggle('on', PENDING_N > 0);
+    if(!d.length){ el.innerHTML = '<div class="note" style="padding:8px 2px">Nothing waiting for you.</div>'; return; }
+    el.innerHTML = `<h2 id="pendHead" style="font-size:16px;margin:4px 0 4px">Changes waiting on you (${d.length})</h2>
+      <div class="note" style="margin:0 0 12px">Every proposal the agent has raised and
+        nobody has decided yet, across all platforms.</div>` +
+      d.map(p=>{
+        const conf=(p.confidence||'medium').toLowerCase();
+        return `<div class="prop" id="q-${esc(p._key)}">
+          <h4>${esc(p.title||p.op)}</h4>
+          <div class="meta"><code>${esc(p.op)}</code>
+            ${p.collection?'· '+esc(p.collection):''}
+            ${p.platform?'· '+esc(p.platform):''}
+            · <span class="conf c-${esc(conf)}">${esc(conf)} confidence</span>
+            ${p.evidence?'· source: '+esc(p.evidence):''}</div>
+          <div class="rat">${inl(String(p.rationale||''))}</div>
+          ${targetLine(p.targets)}
+          <details style="margin:0 0 10px;border:0;background:transparent">
+            <summary style="padding:0;font-size:12.5px;color:#64767F">View exact change</summary>
+            <pre>${esc(JSON.stringify(p,null,1))}</pre></details>
+          <div class="btns" id="qb-${esc(p._key)}">
+            <button class="btn-sm accept" onclick="queueAccept('${esc(p._key)}')">Accept</button>
+            <button class="btn-sm deny" onclick="queueDeny('${esc(p._key)}')">Reject</button>
+            ${p.evidence ? `<button class="btn-sm copy"
+              onclick="showSource('qsrc-${esc(p._key)}','${esc(p.evidence)}',this)">Source</button>` : ''}
+          </div><div id="qsrc-${esc(p._key)}"></div>
+          <div id="qs-${esc(p._key)}"></div></div>`;
+      }).join('');
+  }catch(e){ el.innerHTML = `<div class="err">${esc(e.message)}</div>`; }
+}
+
+async function queueAccept(key){
+  document.getElementById('qb-'+key).innerHTML = '<span class="note">Applying…</span>';
+  try{
+    const r = await fetch('/api/updates/accept', {method:'POST',
+      headers:{'Content-Type':'application/json'}, body: JSON.stringify({key})});
+    const b = await r.json();
+    if(!r.ok) throw new Error(b.detail||'failed');
+    document.getElementById('q-'+key).classList.add('accepted');
+    document.getElementById('qs-'+key).innerHTML =
+      `<div class="note">Saved to the model, tagged <code>evidence_accepted</code>.</div>
+       <div id="qlanded-${key}"></div>`;
+    document.getElementById('qb-'+key).innerHTML = '';
+    // do NOT reload the list here: rebuilding it would throw away the card the
+    // analyst is about to use. Move the counts instead and leave the card put.
+    bumpBadge(-1); loadBacklog(); loadAccepted();
+    showLanded('qlanded-'+key, {key});
+  }catch(e){
+    document.getElementById('qb-'+key).innerHTML =
+      `<button class="btn-sm accept" onclick="queueAccept('${key}')">Retry</button>`;
+    document.getElementById('qs-'+key).innerHTML = `<div class="err">${esc(e.message)}</div>`;
+  }
+}
+
+function bumpBadge(delta){
+  PENDING_N = Math.max(0, PENDING_N + delta);
+  document.getElementById('pendBadge').classList.toggle('on', PENDING_N > 0);
+  const h = document.getElementById('pendHead');
+  if(h) h.textContent = `Changes waiting on you (${PENDING_N})`;
+}
+
+async function queueDeny(key){
+  await fetch('/api/updates/deny', {method:'POST',
+    headers:{'Content-Type':'application/json'}, body: JSON.stringify({key})});
+  document.getElementById('q-'+key).classList.add('denied');
+  document.getElementById('qb-'+key).innerHTML = '<span class="note">Rejected. Model unchanged.</span>';
+  bumpBadge(-1); loadBacklog();
+}
+
+boot();
+</script>
+</body>
+</html>
